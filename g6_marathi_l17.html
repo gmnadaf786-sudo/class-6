@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>इतिहास</title>
+<style>
+:root{--b:#7c2d12;--b2:#c2410c;--g:#15803d;--bl:#1d4ed8;--bg:#fff7ed;--ink:#1c1917;--mut:#78716c;--card:#fff}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Devanagari","Mukta","Segoe UI",system-ui,sans-serif;font-size:17px;line-height:1.55}
+header{background:linear-gradient(135deg,#9a3412,#c2410c 55%,#b45309);color:#fff;padding:14px 14px 12px}
+header h1{margin:0;font-size:20px;line-height:1.3}header small{opacity:.92}
+.wrap{max-width:820px;margin:0 auto;padding:12px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:520px){.hc{padding:12px 10px}.hc .ic{font-size:28px}.hc h2{font-size:16px}.hc p{font-size:12.5px}}
+.hc{background:var(--card);border-radius:18px;padding:16px;box-shadow:0 2px 8px #0002;cursor:pointer;border:2px solid transparent;text-align:left;font:inherit;color:inherit}
+.hc:active{transform:scale(.98)}.hc:hover{border-color:var(--b2)}
+.hc .ic{font-size:34px}.hc h2{margin:4px 0 2px;font-size:20px;color:var(--b)}.hc p{margin:0;color:var(--mut);font-size:14.5px}
+.card{background:var(--card);border-radius:16px;padding:14px;margin:0 0 12px;box-shadow:0 1px 6px #0001}
+.card h2{margin:0 0 6px;font-size:20px;color:var(--b)}
+.card h3{margin:10px 0 4px;font-size:17px;color:var(--b2)}
+.back{border:0;background:#fed7aa;color:#7c2d12;border-radius:999px;padding:8px 16px;font:inherit;font-weight:700;cursor:pointer;margin:0 0 10px}
+.btn{display:inline-block;border:0;border-radius:12px;padding:10px 16px;font:inherit;font-weight:700;background:var(--b2);color:#fff;cursor:pointer;margin:4px 4px 4px 0}
+.btn.gr{background:var(--g)}.btn.bl{background:var(--bl)}.btn.ln{background:#e7e5e4;color:#292524}.btn:disabled{opacity:.4}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.chip{padding:7px 13px;border-radius:999px;background:#ffedd5;font-weight:700;border:2px solid transparent;cursor:pointer;font:inherit;font-weight:700;color:#7c2d12}
+.chip.on{background:#fff;border-color:var(--b2)}
+.info{background:#fef3c7;border-left:5px solid #f59e0b;border-radius:8px;padding:8px 10px;margin:6px 0;min-height:44px}
+.key{background:#ecfccb;border-left:5px solid #65a30d;border-radius:8px;padding:8px 10px;margin:8px 0}
+.say{float:right;border:0;background:#ffedd5;border-radius:999px;padding:6px 12px;font:inherit;font-weight:700;color:var(--b);cursor:pointer}
+.prog{height:8px;background:#fed7aa;border-radius:99px;overflow:hidden;margin:4px 0 10px}.prog i{display:block;height:100%;background:var(--g);transition:width .3s}
+.nav{display:flex;justify-content:space-between;gap:8px;margin-top:10px;align-items:center}
+.flip{background:#e0f2fe;border-radius:12px;padding:10px 12px;margin:6px 0;cursor:pointer;border:2px dashed #38bdf8}
+.flip .fa{display:none;margin-top:6px;font-weight:700;color:#0c4a6e}.flip.on .fa{display:block}.flip .fq{font-weight:700}
+.opt{display:block;width:100%;text-align:left;border:2px solid #d6d3d1;background:#fff;border-radius:12px;padding:9px 12px;margin:6px 0;font:inherit;cursor:pointer}
+.opt.ok{background:#dcfce7;border-color:#16a34a}.opt.no{background:#fee2e2;border-color:#dc2626}
+.msg{margin-top:6px;padding:8px 10px;border-radius:10px;font-weight:600}.msg.ok{background:#dcfce7;color:#166534}.msg.no{background:#fee2e2;color:#991b1b}.msg.in{background:#fef9c3;color:#713f12}
+.mini{border:2px solid #fdba74;border-radius:14px;padding:10px;margin-top:12px;background:#fffbeb}
+table.t{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0}table.t th,table.t td{border:1.5px solid #a8a29e;padding:6px;text-align:center}table.t th{background:#ffedd5}
+select,input[type=text],input[type=number]{font:inherit;padding:6px;border-radius:8px;border:2px solid #a8a29e;max-width:100%}
+.ord{display:flex;flex-direction:column;gap:6px;margin:6px 0}.ord button{text-align:left}
+.tool{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:6px 0}.tool label{font-weight:700}
+.ans{background:#f0fdf4;border-left:5px solid #22c55e;border-radius:8px;padding:8px 10px;margin:6px 0;white-space:pre-line;display:none}
+.ans.show{display:block}
+.qcard{border:1.5px solid #e7e5e4;border-radius:12px;padding:10px;margin:8px 0}
+.tag{display:inline-block;background:#fde68a;color:#78350f;border-radius:99px;padding:1px 10px;font-size:13px;font-weight:700;margin-right:6px}
+.paper{background:#fff;border:1px solid #a8a29e;box-shadow:0 2px 10px #0003;margin:10px auto 0;padding:8px 10px;max-width:210mm;overflow:auto;font-size:14px;
+ background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='360' height='260'><text x='20' y='150' font-size='20' font-weight='700' fill='%23000' fill-opacity='0.055' transform='rotate(-28 180 130)' font-family='sans-serif'>जी.एम.नदाफ केंद्रप्रमुख गिरगांव ता.जत 7972568986</text></svg>")}
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}.sc{background:#fff;border:2px dashed #f59e0b;border-radius:14px;padding:8px;text-align:center;cursor:pointer;min-height:110px}.sc .sy{font-size:44px;line-height:1.2}.sc .sb{display:none}.sc.on .sf{display:none}.sc.on .sb{display:block;color:#14532d}.sc.on{border-style:solid;border-color:#16a34a;background:#f0fdf4}.sf{color:#78716c;font-weight:700}
+.appfoot{text-align:center;font-size:13px;color:#57534e;padding:14px 8px 24px;border-top:1px solid #d6d3d1;margin-top:10px}
+/* document (preview + print) */
+.doc{font-size:11.5pt;color:#000;line-height:1.4}
+.doc .dh{border:1.5px solid #000;padding:5px 8px;margin-bottom:6px}.doc .r{display:flex;justify-content:space-between;gap:10px;margin:3px 0;flex-wrap:wrap}
+.doc .ln{display:inline-block;border-bottom:1px solid #000;min-width:30mm;height:1em}
+.doc .dt{margin:4px 0 0;text-align:center;font-size:15pt}.doc .ds{text-align:center;font-size:10pt;margin-bottom:6px}
+.doc .qh{font-weight:700;margin:9px 0 3px}.doc .qb{break-inside:avoid;margin:4px 0}
+.doc .wl{border-bottom:1px solid #777;height:8mm}
+.doc table.w{border-collapse:collapse;width:100%}.doc table.w th,.doc table.w td{border:1.2px solid #000;padding:3px 6px;text-align:left}.doc table.w th{background:#eee}
+.doc .opts{display:grid;grid-template-columns:1fr 1fr;gap:1px 14px;margin:2px 0 0 18px}
+.doc .key{background:none;border:0;border-top:2px dashed #000;border-radius:0;margin-top:12px;padding-top:6px}
+.doc .a{color:#14532d;font-weight:700}
+.doc pre{font:inherit;white-space:pre-wrap;margin:2px 0}
+table.pg{width:100%;border-collapse:collapse}table.pg td{padding:0;border:0}
+.sph,.spf{height:0}
+#printHost{display:none}
+.wmk,.pfoot{display:none}
+@page{size:A4;margin:0}
+@media print{
+ body{background:#fff}
+ .app{display:none!important}
+ #printHost{display:block}
+ #printHost .doc{padding:0 14mm}
+ .sph{height:13mm}.spf{height:18mm}
+ .wmk{display:block;position:fixed;left:0;right:0;top:46%;transform:translateY(-50%) rotate(-30deg);text-align:center;font-size:30pt;font-weight:700;line-height:1.3;color:#000;opacity:.08;z-index:-1;pointer-events:none;-webkit-print-color-adjust:exact;print-color-adjust:exact;white-space:nowrap}
+ .wmk div:last-child{font-size:24pt}
+ .pfoot{display:flex;justify-content:space-between;gap:10px;position:fixed;left:14mm;right:14mm;bottom:6mm;font-size:8.5pt;color:#333;border-top:1px solid #777;padding-top:2px;background:#fff}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<header><h1 id="hdr">…</h1></header>
+<div class="wrap"><div id="main"></div>
+<div class="appfoot">रचनाकार : जी.एम. नदाफ, केंद्रप्रमुख गिरगांव ता.जत<br>📞 7972568986 · © डिजिटल शिक्षण मंच</div></div>
+</div>
+<div id="printHost"></div>
+<script>
+const IM={};
+const MCQ=[["‘अतुलनीय’ या शब्दाचा अर्थ काय?", "ज्याची तुलना होऊ शकत नाही असा", "कॉम्प्युटर", "प्रेरणा, उत्तेजन", "संकट", "अतुलनीय = ज्याची तुलना होऊ शकत नाही असा"], ["‘ज्याची तुलना होऊ शकत नाही असा’ — हा अर्थ कोणत्या शब्दाचा?", "अतुलनीय", "आपत्ती", "कृतज्ञता", "प्रोत्साहन", "अतुलनीय = ज्याची तुलना होऊ शकत नाही असा"], ["‘प्रोत्साहन’ या शब्दाचा अर्थ काय?", "प्रेरणा, उत्तेजन", "ज्याची तुलना होऊ शकत नाही असा", "प्रयोग करण्याची जागा", "गर्क", "प्रोत्साहन = प्रेरणा, उत्तेजन"], ["‘प्रेरणा, उत्तेजन’ — हा अर्थ कोणत्या शब्दाचा?", "प्रोत्साहन", "व्यस्त", "अतुलनीय", "मनोदय", "प्रोत्साहन = प्रेरणा, उत्तेजन"], ["‘आपत्ती’ या शब्दाचा अर्थ काय?", "संकट", "इच्छा", "ज्याची तुलना होऊ शकत नाही असा", "उपकाराची जाणीव", "आपत्ती = संकट"], ["‘संकट’ — हा अर्थ कोणत्या शब्दाचा?", "आपत्ती", "कृतज्ञता", "व्यस्त", "प्रोत्साहन", "आपत्ती = संकट"], ["‘मनोदय’ या शब्दाचा अर्थ काय?", "इच्छा", "ज्याची तुलना होऊ शकत नाही असा", "कॉम्प्युटर", "संकट", "मनोदय = इच्छा"], ["‘इच्छा’ — हा अर्थ कोणत्या शब्दाचा?", "मनोदय", "कृतज्ञता", "संगणक", "प्रोत्साहन", "मनोदय = इच्छा"], ["‘कृतज्ञता’ या शब्दाचा अर्थ काय?", "उपकाराची जाणीव", "इच्छा", "प्रयोग करण्याची जागा", "प्रेरणा, उत्तेजन", "कृतज्ञता = उपकाराची जाणीव"], ["‘उपकाराची जाणीव’ — हा अर्थ कोणत्या शब्दाचा?", "कृतज्ञता", "प्रयोगशाळा", "आपत्ती", "संगणक", "कृतज्ञता = उपकाराची जाणीव"], ["‘व्यस्त’ या शब्दाचा अर्थ काय?", "गर्क", "कॉम्प्युटर", "इच्छा", "प्रयोग करण्याची जागा", "व्यस्त = गर्क"], ["‘गर्क’ — हा अर्थ कोणत्या शब्दाचा?", "व्यस्त", "अतुलनीय", "संगणक", "मनोदय", "व्यस्त = गर्क"], ["‘संगणक’ या शब्दाचा अर्थ काय?", "कॉम्प्युटर", "इच्छा", "उपकाराची जाणीव", "ज्याची तुलना होऊ शकत नाही असा", "संगणक = कॉम्प्युटर"], ["‘कॉम्प्युटर’ — हा अर्थ कोणत्या शब्दाचा?", "संगणक", "मनोदय", "प्रोत्साहन", "कृतज्ञता", "संगणक = कॉम्प्युटर"], ["‘प्रयोगशाळा’ या शब्दाचा अर्थ काय?", "प्रयोग करण्याची जागा", "प्रेरणा, उत्तेजन", "उपकाराची जाणीव", "कॉम्प्युटर", "प्रयोगशाळा = प्रयोग करण्याची जागा"], ["‘प्रयोग करण्याची जागा’ — हा अर्थ कोणत्या शब्दाचा?", "प्रयोगशाळा", "प्रोत्साहन", "व्यस्त", "कृतज्ञता", "प्रयोगशाळा = प्रयोग करण्याची जागा"], ["योग्य शब्द निवडा: डॉ. भटकर हे जागतिक कीर्तीचे ______ आहेत.", "संगणकतज्ज्ञ", "बडोद्यात", "अतुलनीय", "प्रयोगशाळा", "डॉ. भटकर हे जागतिक कीर्तीचे संगणकतज्ज्ञ आहेत."], ["योग्य शब्द निवडा: त्यांचे बालपण ______ गावात गेले.", "मुरंबा", "व्यस्त", "संगणक", "प्रोत्साहन", "त्यांचे बालपण मुरंबा गावात गेले."], ["योग्य शब्द निवडा: शाळा ______ भरत असे.", "देवळात", "अतुलनीय", "संगणकतज्ज्ञ", "संगणक", "शाळा देवळात भरत असे."], ["योग्य शब्द निवडा: प्रगतिपुस्तकावर ‘विजय भटकर ______ पास’ असा शेरा.", "चौथी", "देवळात", "मनोदय", "संगणकतज्ज्ञ", "प्रगतिपुस्तकावर ‘विजय भटकर चौथी पास’ असा शेरा."], ["योग्य शब्द निवडा: घरात त्यांनी ______ केली होती.", "प्रयोगशाळा", "प्रोत्साहन", "मुरंबा", "मनोदय", "घरात त्यांनी प्रयोगशाळा केली होती."], ["योग्य शब्द निवडा: पदव्युत्तर शिक्षण ______ येथे झाले.", "बडोद्यात", "संगणकतज्ज्ञ", "संगणक", "प्रयोगशाळा", "पदव्युत्तर शिक्षण बडोद्यात येथे झाले."], ["‘अतुलनीय’ चा विरुद्धार्थी शब्द —", "सामान्य", "वाईट", "धोकादायक", "कृतघ्नता", "अतुलनीय × सामान्य"], ["‘प्रोत्साहन’ चा विरुद्धार्थी शब्द —", "निरुत्साह", "सामान्य", "कृतघ्नता", "प्रयोग", "प्रोत्साहन × निरुत्साह"], ["‘चांगले’ चा विरुद्धार्थी शब्द —", "वाईट", "कृतघ्नता", "सामान्य", "संगणक", "चांगले × वाईट"], ["‘कृतज्ञता’ चा विरुद्धार्थी शब्द —", "कृतघ्नता", "प्रयोग", "मुलाखत", "संगणक", "कृतज्ञता × कृतघ्नता"], ["‘सुरक्षित’ चा विरुद्धार्थी शब्द —", "धोकादायक", "निरुत्साह", "संगणक", "प्रयोग", "सुरक्षित × धोकादायक"], ["‘उत्तम’ चा विरुद्धार्थी शब्द —", "निकृष्ट", "कृतघ्नता", "मुलाखत", "सामान्य", "उत्तम × निकृष्ट"], ["डॉ. विजय भटकर कोण?", "संगणकतज्ज्ञ", "खेळाडू", "चित्रकार", "गायक", "संगणक क्षेत्र."], ["त्यांच्या घरी कोणते वातावरण होते?", "शैक्षणिक", "व्यावसायिक", "लष्करी", "खेळाचे", "आई-आजी शिक्षिका."], ["त्यांनी टेस्ट-ट्यूब कशा मिळवल्या?", "वाया गेलेल्या इंजेक्शनच्या पिचकाऱ्यांतून", "दुकानातून", "शाळेतून", "बाजारातून", "धाडसी उपाय."], ["आईने काय केले?", "प्रोत्साहन दिले", "अडवले", "रागावली", "दुर्लक्ष केले", "नवीन गोष्टी करण्यास."], ["‘चौथी पास’ शेरा कोणी दिला?", "शिक्षणाधिकाऱ्यांनी", "वडिलांनी", "आईने", "मित्राने", "परीक्षक."], ["पाठातून काय शिकतो?", "जिज्ञासा, कष्ट, आत्मविश्वास", "आळस", "भीती", "स्पर्धा", "यशाची गुरुकिल्ली."]];
+const SW_A=null;
+const FB=[["डॉ. भटकर हे जागतिक कीर्तीचे ________ आहेत.", "संगणकतज्ज्ञ"], ["त्यांचे बालपण ________ गावात गेले.", "मुरंबा"], ["शाळा ________ भरत असे.", "देवळात"], ["प्रगतिपुस्तकावर ‘विजय भटकर ________ पास’ असा शेरा.", "चौथी"], ["घरात त्यांनी ________ केली होती.", "प्रयोगशाळा"], ["पदव्युत्तर शिक्षण ________ येथे झाले.", "बडोद्यात"]];
+const MT=[["अतुलनीय", "ज्याची तुलना होऊ शकत नाही असा"], ["प्रोत्साहन", "प्रेरणा, उत्तेजन"], ["आपत्ती", "संकट"], ["मनोदय", "इच्छा"], ["कृतज्ञता", "उपकाराची जाणीव"], ["व्यस्त", "गर्क"], ["संगणक", "कॉम्प्युटर"], ["प्रयोगशाळा", "प्रयोग करण्याची जागा"]];
+const TF=[["डॉ. भटकर यांचे बालपण मुरंबा गावात गेले.", 1, ""], ["त्यांचे आजोबा शिक्षक होते.", 0, "आजोबा दोन वर्तमानपत्रांचे संपादक होते."], ["शाळा देवळात भरत असे.", 1, ""], ["डॉ. भटकर यांना चौथीत नापास केले.", 0, "‘चौथी पास’ असा शेरा दिला."], ["त्यांनी टेस्ट-ट्यूब म्हणून पिचकाऱ्या वापरल्या.", 1, ""], ["त्यांना विजेचा धक्का बसला.", 1, ""]];
+const OS=[["डॉ. भटकर कोण आहेत?", "संगणकतज्ज्ञ."], ["त्यांचे गाव कोणते?", "मुरंबा (अकोला जिल्हा)."], ["‘आपत्ती’ म्हणजे?", "संकट."], ["‘अतुलनीय’ म्हणजे?", "ज्याची तुलना होऊ शकत नाही."], ["‘परम’ काय आहे?", "महासंगणक."]];
+const SA=[["डॉ. भटकर यांचे बालपण कसे गेले?", "• खेड्यात.\n• शैक्षणिक वातावरण.\n• भावासोबत प्रयोग."], ["‘चौथी पास’ शेरा का मिळाला?", "• परीक्षेत उत्तम तयारी.\n• शिक्षणाधिकारी आश्चर्यचकित."], ["डॉ. भटकर यांचे गुण सांगा.", "• जिज्ञासा\n• कष्ट\n• आत्मविश्वास"]];
+const HOTS=[["विचार करा", "आईचे प्रोत्साहन महत्त्वाचे का?", "• धाडस वाढते."], ["तयार करा", "परिसरातील यशस्वी व्यक्तीची १० प्रश्नांची मुलाखत.", "• प्रश्नावली."], ["उपयोग", "‘अंतर्मनाचा आवाज’ म्हणजे काय? उदाहरण द्या.", "• योग्य काय ते मन सांगते."], ["तुलना", "डॉ. भटकर आणि रोहन (पाठ १२) — गुण.", "• धाडस."], ["मूल्यमापन", "टेस्ट-ट्यूबसाठी पिचकाऱ्या वापरणे योग्य?", "• सुरक्षा."], ["तयार करा", "संगणकाचे पाच उपयोग लिहा.", "• माहिती, खेळ."], ["उपयोग", "स्वतःचा एक प्रयोग लिहा.", "• साहित्य, कृती."], ["विचार करा", "अपयशातून काय शिकता?", "• जिद्द."]];
+const SWB=[{"h": "प्र. १. कृती.", "t": "table", "head": ["प्रश्न", "उत्तर"], "rows": [["बालपणी प्रयोगशाळेसाठी वापरलेले घरगुती साहित्य", {"a": "वाया गेलेल्या बाटल्या, झाकणे, दोरा, इंजेक्शनच्या पिचकाऱ्या"}]]}, {"h": "प्र. २. थोडक्यात उत्तरे.", "t": "qa", "lines": 2, "items": [["आजी-आजोबांच्या संस्कारांचा परिणाम?", "घरात शैक्षणिक वातावरण, वाचनाची सवय आणि सार्वजनिक कामाची आवड निर्माण झाली."], ["धाडसी उपाय कोणता?", "गावातील दवाखान्यातून वाया गेलेल्या इंजेक्शनच्या पिचकाऱ्या आणून स्वच्छ करून टेस्ट-ट्यूब म्हणून वापरल्या."], ["प्रयोगशाळेसाठी साहित्य?", "रासायनिक पदार्थ, बाटल्या, झाकणे, दोरा."], ["चांगल्या-वाईट कामांसाठी निकष?", "स्वतःच्या अंतर्मनाचा आतला आवाज ऐकून वागणे."]]}, {"h": "प्र. ३. परिणाम.", "t": "qa", "lines": 2, "items": [["‘चौथी पास’ शेरा", "आई-आजीला कौतुक वाटले; आत्मविश्वास वाढला; ते लवकर पुढे गेले."], ["विजेचा धक्का", "वडिलांनी इंजिनिअरिंगची शाखा बदलण्याचा विचार केला; पण त्यांना धोका कळला व सावधगिरी आली."]]}, {"h": "वाक्प्रचार वापरा.", "t": "table", "head": ["वाक्य", "वाक्प्रचार"], "rows": [["चित्रे काढण्यात सर्व मुले ___ झाली.", {"a": "गर्क/दंग"}], ["अन्वर आणि रोहन यांची ___ जमली.", {"a": "गट्टी"}], ["कचरा पाहून दूतांचा ___ झाला.", {"a": "अंगाचा तिळपापड"}]]}, {"h": "मुलाखत प्रश्नावली (नमुना).", "t": "qa", "lines": 3, "items": [["प्रश्न", "१) तुमचे नाव काय? २) तुम्ही कोणते कार्य करता? ३) तुमचे बालपण कसे गेले? ४) कोणत्या अडचणी आल्या? ५) यशाचे रहस्य काय? ६) विद्यार्थ्यांना संदेश?"]]}];
+const L={name:'पाठ 17 : संगणकातील ‘परम’पूज्य',cls:'इयत्ता : 6वी &nbsp; विषय : मराठी',foot:'इ. 6वी मराठी · पाठ 17'};
+const S={"no": 17, "name": "संगणकातील ‘परम’पूज्य", "author": "कविता भालेराव", "text": ["(पाठाचा सारांश — मुलाखत) जागतिक कीर्तीचे संगणकतज्ज्ञ डॉ. विजय भटकर यांचे बालपण अकोला जिल्ह्यातील मूर्तिजापूर तालुक्यातील मुरंबा या खेड्यात गेले. आई-आजी शिक्षिका होत्या, आजोबा दोन वर्तमानपत्रांचे संपादक, वडिलांना सार्वजनिक कामाची आवड — त्यामुळे घरात शैक्षणिक वातावरण होते.", "लहान असताना ते दुसऱ्या इयत्तेचे असूनही भावासोबत चौथीत बसत. देवळात भरणाऱ्या शाळेत चौथीची परीक्षा दिली आणि शिक्षणाधिकाऱ्यांनी ‘चौथी पास’ असा शेरा दिला. भाऊ-बहिणींनी दवाखान्यातून वाया गेलेल्या इंजेक्शनच्या पिचकाऱ्या आणून टेस्ट-ट्यूब बनवल्या. घरात प्रयोगशाळा केली; आई कधी अडवत नसे, उलट प्रोत्साहन देई.", "विजेच्या तारांशी प्रयोग करताना त्यांना विजेचा धक्का बसला. पुढे ते इलेक्ट्रिकल इंजिनिअर झाले, बडोद्यात पदव्युत्तर शिक्षण घेतले. कौटुंबिक अडचणी असतानाही त्यांनी कष्ट व आत्मविश्वासाने प्रगती केली आणि भारताचा पहिला महासंगणक ‘परम’ घडवण्यात महत्त्वाची भूमिका बजावली. ते ‘चांगले-वाईट ठरवताना अंतर्मनाचा आवाज ऐका’ असे सांगतात."], "words": [["अतुलनीय", "ज्याची तुलना होऊ शकत नाही असा"], ["प्रोत्साहन", "प्रेरणा, उत्तेजन"], ["आपत्ती", "संकट"], ["मनोदय", "इच्छा"], ["कृतज्ञता", "उपकाराची जाणीव"], ["व्यस्त", "गर्क"], ["संगणक", "कॉम्प्युटर"], ["प्रयोगशाळा", "प्रयोग करण्याची जागा"]], "dict": {"संगणकतज्ज्ञ": "कॉम्प्युटर तज्ज्ञ", "मुलाखत": "प्रश्नोत्तरे", "शेरा": "शिक्षकाची टिप्पणी", "धक्का": "झटका", "पदव्युत्तर": "पदवीनंतरचे शिक्षण", "परम": "भारताचा महासंगणक", "टेस्ट-ट्यूब": "प्रयोगासाठीची काचेची नळी", "इंजिनिअर": "अभियंता"}, "sents": ["डॉ. भटकर यांनी घरी प्रयोगशाळा केली.", "आईने त्यांना प्रोत्साहन दिले.", "त्यांनी पदव्युत्तर शिक्षण बडोद्यात घेतले.", "त्यांना विजेचा धक्का बसला."], "order": ["डॉ. भटकर यांचे बालपण मुरंबा गावात गेले.", "ते भावाच्या वर्गात बसू लागले.", "चौथी पास असा शेरा मिळाला.", "घरी प्रयोगशाळा केली.", "विजेचा धक्का बसला.", "ते इलेक्ट्रिकल इंजिनिअर झाले."], "who": [["तू कोणतेही कृत्य अंतर्मनाचा आवाज ऐकून कर.", "डॉ. भटकर"], ["प्रयोग करू नका असे आई कधीच म्हणाली नाही.", "डॉ. भटकर"], ["तुमच्या बालपणाविषयी सांगाल का?", "लेखिका"], ["मी तुमची मुलाखत घेतली.", "लेखिका"]], "match": [["अतुलनीय", "तुलना न होणारा"], ["आपत्ती", "संकट"], ["मनोदय", "इच्छा"], ["कृतज्ञता", "उपकाराची जाणीव"], ["व्यस्त", "गर्क"], ["प्रोत्साहन", "प्रेरणा"]], "matchT": "शब्द व अर्थ", "matchH": "शब्दाला योग्य अर्थ जोडा", "sort": [["टेस्ट-ट्यूब", 0], ["इंजेक्शन पिचकारी", 0], ["वाया गेलेल्या बाटल्या", 0], ["झाकणे", 0], ["आई", 1], ["आजी", 1], ["आजोबा", 1], ["वडील", 1], ["भाऊ", 1]], "sortC": ["प्रयोगाचे साहित्य", "कुटुंबातील व्यक्ती"], "sortT": "गट करा", "sortH": "हे कोणत्या गटात?", "gram": [["‘गर्क असणे’ चा अर्थ —", ["दंग असणे", "आजारी असणे", "दूर असणे"], 0, "एखाद्या कामात मग्न."], ["‘अंगाचा तिळपापड होणे’ चा अर्थ —", ["खूप राग येणे", "आनंद होणे", "झोप येणे"], 0, "संताप."], ["‘गट्टी जमणे’ चा अर्थ —", ["मैत्री होणे", "भांडण होणे", "स्पर्धा होणे"], 0, "दोस्ती."], ["मुलाखत म्हणजे —", ["प्रश्नोत्तरांद्वारे माहिती घेणे", "पत्र लिहिणे", "निबंध लिहिणे"], 0, "प्रश्न-उत्तर."], ["डॉ. भटकर कोणत्या क्षेत्रातील?", ["संगणक", "क्रीडा", "चित्रकला"], 0, "संगणकतज्ज्ञ."], ["‘परम’ हे काय आहे?", ["महासंगणक", "खेळ", "पुस्तक"], 0, "भारताचा पहिला महासंगणक."]], "gramT": "वाक्प्रचार व मुलाखत", "gramNote": "<b>वाक्प्रचार:</b> दंग असणे = गर्क असणे; गट्टी जमणे = मैत्री होणे; अंगाचा तिळपापड होणे = खूप राग येणे. <b>मुलाखत</b> — प्रश्न विचारून माहिती घेणे.", "tf": [["डॉ. भटकर यांचे बालपण मुरंबा गावात गेले.", 1, ""], ["त्यांचे आजोबा शिक्षक होते.", 0, "आजोबा दोन वर्तमानपत्रांचे संपादक होते."], ["शाळा देवळात भरत असे.", 1, ""], ["डॉ. भटकर यांना चौथीत नापास केले.", 0, "‘चौथी पास’ असा शेरा दिला."], ["त्यांनी टेस्ट-ट्यूब म्हणून पिचकाऱ्या वापरल्या.", 1, ""], ["त्यांना विजेचा धक्का बसला.", 1, ""]], "blanks": [["डॉ. भटकर हे जागतिक कीर्तीचे ___ आहेत.", "संगणकतज्ज्ञ"], ["त्यांचे बालपण ___ गावात गेले.", "मुरंबा"], ["शाळा ___ भरत असे.", "देवळात"], ["प्रगतिपुस्तकावर ‘विजय भटकर ___ पास’ असा शेरा.", "चौथी"], ["घरात त्यांनी ___ केली होती.", "प्रयोगशाळा"], ["पदव्युत्तर शिक्षण ___ येथे झाले.", "बडोद्यात"]], "xbank": ["अकोला", "दुसरी"], "opp": [["अतुलनीय", "सामान्य"], ["प्रोत्साहन", "निरुत्साह"], ["चांगले", "वाईट"], ["कृतज्ञता", "कृतघ्नता"], ["सुरक्षित", "धोकादायक"], ["उत्तम", "निकृष्ट"]], "oppx": ["संगणक", "मुलाखत", "प्रयोग"], "qa": [["डॉ. विजय भटकर कोण?", "संगणकतज्ज्ञ", "खेळाडू", "चित्रकार", "गायक", "संगणक क्षेत्र."], ["त्यांच्या घरी कोणते वातावरण होते?", "शैक्षणिक", "व्यावसायिक", "लष्करी", "खेळाचे", "आई-आजी शिक्षिका."], ["त्यांनी टेस्ट-ट्यूब कशा मिळवल्या?", "वाया गेलेल्या इंजेक्शनच्या पिचकाऱ्यांतून", "दुकानातून", "शाळेतून", "बाजारातून", "धाडसी उपाय."], ["आईने काय केले?", "प्रोत्साहन दिले", "अडवले", "रागावली", "दुर्लक्ष केले", "नवीन गोष्टी करण्यास."], ["‘चौथी पास’ शेरा कोणी दिला?", "शिक्षणाधिकाऱ्यांनी", "वडिलांनी", "आईने", "मित्राने", "परीक्षक."], ["पाठातून काय शिकतो?", "जिज्ञासा, कष्ट, आत्मविश्वास", "आळस", "भीती", "स्पर्धा", "यशाची गुरुकिल्ली."]], "acts": ["read", "basket", "order", "who", "match", "sort", "gram", "tf", "cloze", "opp", "qa", "scramble", "memory", "speak"]};
+const SYM=[];const symGrid2=()=>'';
+const EN=(t,r)=>{try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='mr-IN';u.rate=r||.8;const vs=speechSynthesis.getVoices();const v=vs.find(x=>/mr[-_]IN/i.test(x.lang))||vs.find(x=>/^(mr|hi)/i.test(x.lang));if(v)u.voice=v;speechSynthesis.speak(u)}catch(e){}};
+setTimeout(()=>{window.say=t=>EN(t,.85)},0);window.say=t=>EN(t,.85);
+const enb=(t,lab)=>`<button class="say" style="float:none;margin:0 4px" onclick="EN(this.dataset.t)" data-t="${esc(t).replace(/"/g,'&quot;')}">🔊${lab?' '+lab:''}</button>`;
+const D={};S.words.forEach(w=>{D[w[0]]=w[1]});Object.keys(S.dict||{}).forEach(k=>D[k.toLowerCase()]=S.dict[k]);
+const TOK=/[\u0900-\u097F]+/g;
+const look=k=>D[k]||D[k.replace(/(ने|ला|ना|चा|ची|चे|च्या|ात|ात|त|ही|ं)$/,'')];
+const pw=l=>l.replace(TOK,m=>{const k=m;return `<span class="pw${look(k)?' pm':''}" data-k="${k}" onclick="pwc(this)">${m}</span>`});
+function pwc(e){const k=e.dataset.k;EN(k,.7);const m=look(k);$('wm').innerHTML=`🔊 <b>${k}</b>${m?' — '+m:''}`}
+function spell(w,hint){const id='sp'+(++WID);const R=rng(3+WID);const t=shuf(w.split('').map((c,i)=>[c,i]),R);return `<div class="mini" id="${id}" data-w="${w}" data-a=""><b>🔤 ${enb(w,'ऐका')} अक्षरे दाबून शब्द बनवा</b> <small>(${hint})</small><div id="${id}o" style="font-size:26px;font-weight:800;letter-spacing:5px;min-height:42px;border-bottom:3px dashed #fb923c;margin:8px 0"></div><div style="display:flex;gap:6px;flex-wrap:wrap">${t.map(([c,i])=>`<button class="chip" onclick="spt('${id}',this)">${c}</button>`).join('')}</div><button class="btn ln" onclick="spr('${id}')">↺ पुन्हा</button><div class="mm"></div></div>`}
+function spt(id,b){const box=$(id);if(box.dataset.done||b.disabled)return;b.disabled=true;b.style.opacity=.3;box.dataset.a+=b.textContent;$(id+'o').textContent=box.dataset.a;if(box.dataset.a.length==box.dataset.w.length){const ok=box.dataset.a==box.dataset.w;box.querySelector('.mm').innerHTML=ok?'<div class="msg ok">🎉 बरोबर!</div>':'<div class="msg no">✘ Not correct. Press ↺ and try again.</div>';if(ok){box.dataset.done=1;LS.pts++;updProg();EN(box.dataset.w)}}}
+function spr(id){const box=$(id);if(box.dataset.done)return;box.dataset.a='';$(id+'o').textContent='';box.querySelectorAll('.chip').forEach(b=>{b.disabled=false;b.style.opacity=1});box.querySelector('.mm').innerHTML=''}
+function lqe(w,right,wr){const o=[right].concat(wr);const R=rng(5+WID);const sh=shuf(o.map((x,i)=>[x,i]),R);const id='lq'+(++WID);return `<div class="mini" id="${id}"><b>🎧 ${enb(w,'ऐका')} योग्य अर्थ कोणता?</b>${sh.map(([x,i])=>`<button class="opt" onclick="mqa('${id}',this,${i==0},'${esc(w).replace(/'/g,"\\'")} = ${esc(right).replace(/'/g,"\\'")}')">${x}</button>`).join('')}<div class="mm"></div></div>`}
+function pron(id,w){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;const mm=$(id).querySelector('.mm');if(!SR){mm.innerHTML='<div class="msg in">बोलण्याची तपासणी फक्त Chrome मध्ये चालते. ऐका व मोठ्याने म्हणा.</div>';return}try{const r=new SR();r.lang='mr-IN';r.onresult=e=>{const t=e.results[0][0].transcript.toLowerCase();const ok=t.indexOf(w.toLowerCase())>=0;mm.innerHTML=`<div class="msg ${ok?'ok':'no'}">तुम्ही म्हणालात: “${esc(t)}” — ${ok?'🎉 छान!':'पुन्हा ऐका व म्हणा.'}</div>`;if(ok){LS.pts++;updProg()}};r.onerror=()=>{mm.innerHTML='<div class="msg in">माईकची परवानगी द्या व पुन्हा प्रयत्न करा.</div>'};r.start();mm.innerHTML='<div class="msg in">🎤 आता बोला…</div>'}catch(e){mm.innerHTML='<div class="msg in">माईक सुरू झाला नाही.</div>'}}
+function pr(w,mr){const id='pr'+(++WID);return `<div class="mini" id="${id}"><b>${enb(w)} ${w}</b> <small>(${mr})</small> <button class="btn gr" style="margin:0 0 0 6px" onclick="pron('${id}','${w.replace(/'/g,"\\'")}')">🎤 मी म्हणतो/ते</button><div class="mm"></div></div>`}
+function memo(pairs){const id='mm'+(++WID);const R=rng(9+WID);const cs=shuf(pairs.flatMap((p,i)=>[[p[0],i],[p[1],i]]),R);return `<div class="mini" id="${id}" data-left="${pairs.length}"><b>🃏 जोड्या शोधा</b> <small>दोन कार्ड उघडा; शब्द व अर्थ जुळवा.</small><div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:8px 0">${cs.map(([t,i])=>`<button class="opt" style="margin:0;min-height:54px;text-align:center;font-size:14px" data-i="${i}" data-t="${esc(t).replace(/"/g,'&quot;')}" onclick="mmc('${id}',this)">❓</button>`).join('')}</div><div class="mm"></div></div>`}
+function mmc(id,b){const box=$(id);if(box.dataset.lock||b.classList.contains('ok')||b.dataset.up)return;b.textContent=b.dataset.t;b.dataset.up=1;b.style.background='#fef3c7';const up=[...box.querySelectorAll('button[data-up]')];if(up.length==2){box.dataset.lock=1;if(up[0].dataset.i==up[1].dataset.i){up.forEach(x=>{x.classList.add('ok');delete x.dataset.up;x.style.background='#dcfce7'});box.dataset.lock='';box.dataset.left--;if(box.dataset.left==0){box.querySelector('.mm').innerHTML='<div class="msg ok">🎉 सगळ्या जोड्या जुळल्या!</div>';LS.pts++;updProg()}}else setTimeout(()=>{up.forEach(x=>{x.textContent='❓';delete x.dataset.up;x.style.background=''});box.dataset.lock=''},900)}}
+function scr(sent){const id='sr'+(++WID);const w=sent.split(' ');const R=rng(13+WID);const sh=shuf(w.map((x,i)=>[x,i]),R);return `<div class="mini" id="${id}" data-s="${esc(sent).replace(/"/g,'&quot;')}" data-a=""><b>🧩 वाक्य तयार करा</b> ${enb(sent)}<div id="${id}o" style="min-height:40px;border-bottom:3px dashed #fb923c;margin:8px 0;font-weight:700"></div><div style="display:flex;gap:6px;flex-wrap:wrap">${sh.map(([x])=>`<button class="chip" onclick="srt('${id}',this)">${esc(x)}</button>`).join('')}</div><button class="btn ln" onclick="srr('${id}')">↺ पुन्हा</button><div class="mm"></div></div>`}
+function srt(id,b){const box=$(id);if(box.dataset.done||b.disabled)return;b.disabled=true;b.style.opacity=.3;box.dataset.a+=(box.dataset.a?' ':'')+b.textContent;$(id+'o').textContent=box.dataset.a;const n=box.dataset.s.split(' ').length;if(box.dataset.a.split(' ').length==n){const ok=box.dataset.a==box.dataset.s;box.querySelector('.mm').innerHTML=ok?'<div class="msg ok">🎉 अचूक वाक्य!</div>':'<div class="msg no">✘ चुकले. ↺ दाबून पुन्हा प्रयत्न करा.</div>';if(ok){box.dataset.done=1;LS.pts++;updProg();EN(box.dataset.s)}}}
+function srr(id){const box=$(id);if(box.dataset.done)return;box.dataset.a='';$(id+'o').textContent='';box.querySelectorAll('.chip').forEach(b=>{b.disabled=false;b.style.opacity=1});box.querySelector('.mm').innerHTML=''}
+function pick(instr,sent,targets){const id='pk'+(++WID);return `<div class="mini" id="${id}" data-t="${esc(JSON.stringify(targets.map(x=>x.toLowerCase()))).replace(/"/g,'&quot;')}"><b>👆 ${instr}</b><div style="line-height:2.3;margin:8px 0;font-size:17px">${sent.replace(TOK,m=>`<span class="pk" data-k="${m.toLowerCase()}" onclick="this.classList.toggle('sel');this.style.background=this.classList.contains('sel')?'#fde68a':''" style="padding:2px 4px;border-radius:6px;cursor:pointer">${m}</span>`)}</div><button class="btn gr" onclick="pkc('${id}')">तपासा</button><div class="mm"></div></div>`}
+function pkc(id){const box=$(id);const t=JSON.parse(box.dataset.t);let ok=true;box.querySelectorAll('.pk').forEach(s=>{const want=t.includes(s.dataset.k),got=s.classList.contains('sel');if(want!=got){ok=false;s.style.background='#fecaca'}else if(got)s.style.background='#bbf7d0'});box.querySelector('.mm').innerHTML=ok?'<div class="msg ok">🎉 बरोबर!</div>':'<div class="msg in">लाल शब्द चुकीचे/राहिलेले आहेत. पुन्हा करा.</div>';if(ok){LS.pts++;updProg()}}
+const shw=(a,seed)=>shuf(a,rng(seed));
+const miniS=(q,opts,ans,why)=>{const o=opts.map((x,i)=>[x,i]);const s=shuf(o,rng(q.length+7));return mini(q,s.map(x=>x[0]),s.findIndex(x=>x[1]==ans),why)};
+const ACT={
+read:()=>({t:'ऐका व वाचा',say:'मजकूर ऐका. कोणत्याही शब्दावर दाबा — उच्चार व अर्थ दिसेल.',h:()=>`<style>.pw{cursor:pointer}.pm{border-bottom:2px dotted #ea580c;color:#9a3412;font-weight:700}.pl{font-size:17px;line-height:1.85;margin:2px 0}.st{background:#fff7ed;border-radius:14px;padding:10px 12px;margin:10px 0}</style><div class="key">🎧 🔊 दाबून ऐका. शब्दावर दाबा.</div><button class="btn bl" onclick="EN(S.text.join(' '),.75)">▶ सगळे ऐका</button><div id="wm" class="msg in" style="position:sticky;top:4px;z-index:5;min-height:24px">👆 एखाद्या शब्दावर दाबा</div>${S.text.map(p=>`<div class="st">${enb(p.replace(/\n/g,' '))}${p.split('\n').map(l=>`<div class="pl">${pw(l)}</div>`).join('')}</div>`).join('')}${S.author?`<p style="text-align:right"><i>– ${S.author}</i></p>`:''}`}),
+basket:()=>({t:'शब्दसंग्रह',say:'नवीन शब्द शिका. कार्ड दाबून अर्थ पहा.',h:()=>`<div class="key">कार्ड दाबा — अर्थ दिसेल.</div><div class="sg">${S.words.map(w=>`<div class="sc" onclick="this.classList.toggle('on');EN('${w[0].replace(/'/g,"\\'")}')"><div class="sy" style="font-size:19px">${w[0]}</div><div class="sf">👆 meaning?</div><div class="sb"><b>${w[1]}</b></div></div>`).join('')}</div>`}),
+listen:()=>({t:'ऐका व निवडा',say:'शब्द ऐका व अर्थ निवडा.',h:()=>{const W=S.words;return W.slice(0,6).map((w,i)=>{const o=W.filter((_,j)=>j!=i).map(x=>x[1]);return lqe(w[0],w[1],shw(o,i+3).slice(0,2))}).join('')}}),
+memory:()=>({t:'जोड्या शोधा',say:'शब्द व अर्थ जुळवा.',h:()=>memo(S.words.slice(0,6).map(w=>[w[0],w[1]]))}),
+spell:()=>({t:'Spelling Game',say:'ऐका.',h:()=>S.words.filter(w=>/^[A-Za-z]{4,10}$/.test(w[0])).slice(0,5).map(w=>spell(w[0],w[2])).join('')}),
+scramble:()=>({t:'वाक्य रचना',say:'शब्द योग्य क्रमाने दाबून वाक्य बनवा.',h:()=>S.sents.map(s=>scr(s)).join('')}),
+order:()=>({t:'क्रम लावा',say:'घटना योग्य क्रमाने लावा.',h:()=>ordGame('घटना घडलेल्या क्रमाने दाबा',S.order)}),
+who:()=>({t:'हे कोण म्हणाले?',say:'वाक्य व बोलणारा जुळवा.',h:()=>matchSel('कोणी म्हटले?',S.who.map(x=>[`“${x[0]}”`,x[1]]),[...new Set(S.who.map(x=>x[1]))])}),
+tf:()=>({t:'बरोबर की चूक',say:'वाक्य बरोबर की चूक ते सांगा.',h:()=>sortGame('बरोबर की चूक?',S.tf.slice(0,7).map(x=>[x[0],x[1]?0:1]),['बरोबर ✔','चूक ✘'])}),
+cloze:()=>({t:'रिकाम्या जागा भरा',say:'योग्य शब्द निवडा.',h:()=>cloze('रिकाम्या जागा भरा',S.blanks.slice(0,6).map((b,i)=>`${i+1}. ${b[0]}`).join('<br>'),S.blanks.slice(0,6).map(b=>b[1]),shw([...new Set(S.blanks.map(b=>b[1]).concat(S.xbank||[]))],5))}),
+opp:()=>({t:'विरुद्धार्थी शब्द',say:'विरुद्धार्थी जोड्या जुळवा.',h:()=>matchSel('विरुद्धार्थी शोधा',S.opp.map(x=>[x[0],x[1]]),shw(S.opp.map(x=>x[1]),4))}),
+qa:()=>({t:'झटपट प्रश्न',say:'पाठावरील प्रश्न सोडवा.',h:()=>S.qa.slice(0,6).map(q=>miniS(q[0],[q[1],q[2],q[3],q[4]],0,q[5])).join('')}),
+gram:()=>({t:S.gramT||'व्याकरण',say:'शिका व सराव करा.',h:()=>(S.gramNote?`<div class="key">${S.gramNote}</div>`:'')+S.gram.map(g=>miniS(g[0],g[1],g[2],g[3])).join('')}),
+pick:()=>({t:'शब्द शोधा',say:'योग्य शब्दांवर दाबा.',h:()=>S.pick.map(p=>pick(p[0],p[1],p[2])).join('')}),
+match:()=>({t:S.matchT||'जोड्या लावा',say:'जोड्या लावा.',h:()=>matchSel(S.matchH||'Match',S.match.map(x=>[x[0],x[1]]),shw([...new Set(S.match.map(x=>x[1]))],8))}),
+sort:()=>({t:S.sortT||'गट करा',say:'योग्य गट निवडा.',h:()=>sortGame(S.sortH||'कोणता गट?',S.sort,S.sortC)}),
+rhyme:()=>({t:'यमक जुळवा',say:'यमक जुळणारे शब्द जोडा.',h:()=>matchSel('कोणते शब्द यमक जुळतात?',S.rhyme.map(x=>[x[0],x[1]]),shw(S.rhyme.map(x=>x[1]),6))}),
+dialog:()=>({t:'तुम्ही काय कराल?',say:'सर्वोत्तम उत्तर निवडा.',h:()=>S.dialog.map(d=>scen(d[0],d[1],d[2])).join('')}),
+riddle:()=>({t:'ओळखा',say:'संकेत पाहून ओळखा.',h:()=>S.riddles.map(r=>miniS(r[0],r[1],r[2],r[3])).join('')}),
+speak:()=>({t:'बोलून पहा',say:'आधी ऐका; मग मोठ्याने म्हणा.',h:()=>`<div class="key">🔊 ऐका, then press 🎤 and say the word. (The mic works in Chrome on the website only.)</div>${S.words.slice(0,5).map(w=>pr(w[0],w[1])).join('')}`})
+};
+const SECS=S.acts.map(a=>ACT[a]());
+{const lh=SECS[SECS.length-1].h;SECS[SECS.length-1].h=()=>lh()+'<div class="key" id="fin"></div>'}
+function chkMt(){}
+
+</script>
+<script>
+/* ---------- helpers ---------- */
+const $=id=>document.getElementById(id);
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function shuf(a,R){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(R()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function say(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='mr-IN';u.rate=.9;const v=speechSynthesis.getVoices().find(x=>/mr/i.test(x.lang))||speechSynthesis.getVoices().find(x=>/hi/i.test(x.lang));if(v)u.voice=v;speechSynthesis.speak(u)}catch(e){}}
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const sx=t=>`<button class="say" onclick="say(this.dataset.t)" data-t="${esc(t).replace(/"/g,'&quot;')}">🗣 ऐका</button>`;
+const LET=['अ','ब','क','ड','इ'];
+let view='home';
+function go(v){view=v;try{history.replaceState(null,'','#'+v)}catch(e){}draw();window.scrollTo({top:0})}
+function draw(){const m=$('main');({home:vHome,learn:vLearn,mcq:vMcq,sw:vSw,hots:vHots}[view]||vHome)(m)}
+
+/* ---------- home ---------- */
+function vHome(m){m.innerHTML=`<div class="grid">
+<button class="hc" onclick="go('learn')"><div class="ic">📖</div><h2>1. शिकू या</h2><p>पायरी-पायरीने पाठ समजून घ्या – कृतीसह, स्वतः तपासा</p></button>
+<button class="hc" onclick="go('mcq')"><div class="ic">❓</div><h2>2. MCQ प्रश्न</h2><p>बहुपर्यायी सराव + A4 PDF (उत्तरसूचीसह)</p></button>
+<button class="hc" onclick="go('sw')"><div class="ic">✍️</div><h2>3. स्वाध्याय</h2><p>अ) पुस्तकातील · ब) अधिक (पुस्तकाबाहेरील) – PDF</p></button>
+<button class="hc" onclick="go('hots')"><div class="ic">🧠</div><h2>4. उपयोजनात्मक / HOTS</h2><p>विचार करायला लावणारे प्रश्न – PDF</p></button></div>`}
+
+/* ---------- widgets ---------- */
+const symGrid=()=>`<div class="sg">${SYM.map(s=>`<div class="sc" onclick="this.classList.toggle('on')"><div class="sy">${s[0]}</div><div class="sf">❓ कोणता धर्म?<br><small>(टिचकी मारा)</small></div><div class="sb"><b>${s[1]}</b><br><small>${s[2]}</small></div></div>`).join('')}</div>`;
+const phGrid=(ks)=>`<div class="sg">${ks.map(k=>`<div class="sc" onclick="this.classList.toggle('on')"><img src="${IM[k[0]]}" style="width:100%;border-radius:8px"><div class="sf" style="font-size:13px">❓ हे काय आहे?</div><div class="sb"><b>${k[1]}</b></div></div>`).join('')}</div>`;
+const qimg=k=>`<img src="${IM[k]}" style="width:100%;max-width:300px;border-radius:10px;display:block;margin:6px 0">`;
+let WID=0;
+function chipsInfo(items){const id='ci'+(++WID);return `<div class="chips" id="${id}c">${items.map((x,i)=>`<button class="chip" onclick="ci('${id}',${i})">${x[0]}</button>`).join('')}</div><div class="info" id="${id}">👆 एखाद्या शब्दावर टिचकी मारा.</div>`+`<script type="text/plain" id="${id}d">${esc(JSON.stringify(items.map(x=>x[1])))}<\/script>`}
+function ci(id,i){const d=JSON.parse($(id+'d').textContent.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&'));$(id).innerHTML=d[i];[...$(id+'c').children].forEach((c,j)=>c.classList.toggle('on',i==j))}
+const flip=(q,a)=>`<div class="flip" onclick="this.classList.toggle('on')"><div class="fq">❓ ${q}</div><div class="fa">✔ ${a}</div></div>`;
+function mini(q,opts,ans,why){const id='mq'+(++WID);return `<div class="mini" id="${id}"><b>🧩 स्वतः तपासा:</b> ${q}${opts.map((o,i)=>`<button class="opt" onclick="mqa('${id}',this,${i==ans},'${esc(why).replace(/'/g,"\\'")}')">${o}</button>`).join('')}<div class="mm"></div></div>`}
+function mqa(id,b,ok,why){const box=$(id);if(box.dataset.done)return;b.classList.add(ok?'ok':'no');const mm=box.querySelector('.mm');
+ if(ok){box.dataset.done=1;mm.innerHTML=`<div class="msg ok">🎉 बरोबर! ${why}</div>`;LS.pts++;updProg()}else mm.innerHTML='<div class="msg no">✘ पुन्हा प्रयत्न करा.</div>'}
+function ordGame(title,items){const id='og'+(++WID);const R=rng(7+WID);const sh=shuf(items.map((x,i)=>[x,i]),R);
+ return `<div class="mini" id="${id}" data-n="${items.length}" data-k="0"><b>🔢 ${title}</b><div class="ord">${sh.map(([x,i])=>`<button class="opt" data-i="${i}" onclick="ogc('${id}',this)">${x}</button>`).join('')}</div><div class="mm">क्रमाने एकेक घटना निवडा.</div></div>`}
+function ogc(id,b){const box=$(id);let k=+box.dataset.k;if(b.classList.contains('ok'))return;const mm=box.querySelector('.mm');
+ if(+b.dataset.i===k){b.classList.add('ok');b.innerHTML=(k+1)+'. '+b.innerHTML;box.dataset.k=++k;mm.innerHTML=k==box.dataset.n?'<div class="msg ok">🎉 सर्व क्रम बरोबर!</div>':'<div class="msg in">बरोबर! पुढची घटना कोणती?</div>';if(k==box.dataset.n){LS.pts++;updProg()}}
+ else mm.innerHTML='<div class="msg no">✘ ही घटना आता नाही. विचार करून पुन्हा निवडा.</div>'}
+
+
+function sortGame(title,items,cats){const id='sg'+(++WID);return `<div class="mini" id="${id}" data-n="${items.length}" data-k="0"><b>🗂 ${title}</b>${items.map((x,i)=>`<div class="qcard" id="${id}_${i}"><div>${x[0]}</div><div class="chips">${cats.map((c,j)=>`<button class="chip" onclick="sgc('${id}',${i},${j},${x[1]})">${c}</button>`).join('')}</div></div>`).join('')}<div class="mm"></div></div>`}
+function sgc(id,i,j,right){const r=$(id+'_'+i);if(r.dataset.d)return;const box=$(id);if(j==right){r.dataset.d=1;r.style.background='#dcfce7';r.querySelectorAll('.chip').forEach((c,k)=>{c.disabled=true;c.classList.toggle('on',k==j)});box.dataset.k=+box.dataset.k+1;LS.pts++;updProg();if(box.dataset.k==box.dataset.n)box.querySelector('.mm').innerHTML='<div class="msg ok">🎉 सर्व बरोबर!</div>'}else{r.style.background='#fee2e2';setTimeout(()=>{if(!r.dataset.d)r.style.background=''},700)}}
+function matchSel(title,rows,opts){const id='ms'+(++WID);return `<div class="mini" id="${id}"><b>🧩 ${title}</b><table class="t">${rows.map((r,i)=>`<tr><td style="text-align:left">${r[0]}</td><td><select id="${id}_${i}"><option value="">–</option>${opts.map(o=>`<option>${o}</option>`).join('')}</select></td></tr>`).join('')}</table><button class="btn gr" onclick="msc('${id}',${esc(JSON.stringify(rows.map(r=>r[1]))).replace(/"/g,'&quot;')})">तपासा</button><div class="mm"></div></div>`}
+function msc(id,ans){let ok=0;ans.forEach((a,i)=>{const s=$(id+'_'+i),g=s.value==a;if(g)ok++;s.style.background=s.value?(g?'#dcfce7':'#fee2e2'):''});$(id).querySelector('.mm').innerHTML=ok==ans.length?'<div class="msg ok">🎉 सर्व बरोबर!</div>':`<div class="msg in">${ok}/${ans.length} बरोबर. लाल रंगाची उत्तरे बदला.</div>`;if(ok==ans.length){LS.pts++;updProg()}}
+
+/* ---------- नागरिकशास्त्र विशेष widgets ---------- */
+function scen(title,sit,opts){const id='sc'+(++WID);return `<div class="mini" id="${id}"><b>🎭 ${title}</b><div class="key" style="margin:6px 0">${sit}</div>${opts.map((o,i)=>`<button class="opt" onclick="scc('${id}',this,${o[1]},'${esc(o[2]).replace(/'/g,"\\'")}')">${o[0]}</button>`).join('')}<div class="mm">तुम्ही काय कराल? एक पर्याय निवडा.</div></div>`}
+function scc(id,b,good,why){const box=$(id);if(box.dataset.done)return;b.classList.add(good?'ok':'no');const mm=box.querySelector('.mm');mm.innerHTML=`<div class="msg ${good?'ok':'no'}">${good?'🎉 योग्य निर्णय!':'⚠ विचार करा.'} ${why}</div>`;if(good){box.dataset.done=1;LS.pts++;updProg()}}
+function cloze(title,text,ans,bank){const id='cz'+(++WID);let k=0;const h=text.replace(/___/g,()=>{const i=k++;return `<select id="${id}_${i}" style="font:inherit;padding:2px;border-radius:6px"><option value="">____</option>${bank.map(o=>`<option>${o}</option>`).join('')}</select>`});
+ return `<div class="mini" id="${id}"><b>✍ ${title}</b><div style="line-height:2.1;margin:8px 0">${h}</div><button class="btn gr" onclick="czc('${id}',${esc(JSON.stringify(ans)).replace(/"/g,'&quot;')})">तपासा</button><div class="mm"></div></div>`}
+function czc(id,ans){let ok=0;ans.forEach((a,i)=>{const s=$(id+'_'+i),g=s.value==a;if(g)ok++;s.style.background=s.value?(g?'#dcfce7':'#fee2e2'):''});$(id).querySelector('.mm').innerHTML=ok==ans.length?'<div class="msg ok">🎉 सर्व बरोबर!</div>':`<div class="msg in">${ok}/${ans.length} बरोबर. लाल रंगाची रिकामी जागा पुन्हा भरा.</div>`;if(ok==ans.length){LS.pts++;updProg()}}
+function tree(title,nodes){const r=(n)=>`<details style="margin:4px 0 4px 10px"><summary style="cursor:pointer;font-weight:700;color:#7c2d12">${n[0]}</summary><div style="margin:4px 0 4px 8px;font-size:15px">${n[1]||''}</div>${(n[2]||[]).map(r).join('')}</details>`;return `<div class="mini"><b>🌳 ${title}</b><div style="margin-top:6px">${nodes.map(r).join('')}</div><div class="mm" style="font-size:13px;color:#78716c">▶ टिचकी मारून उघडा.</div></div>`}
+function voteSim(title,cands,rule){const id='vt'+(++WID);const R=rng(11+WID);const base=cands.map(()=>3+Math.floor(R()*8));return `<div class="mini" id="${id}" data-base='${JSON.stringify(base)}'><b>🗳 ${title}</b><div class="key" style="margin:6px 0">${rule}</div>${cands.map((c,i)=>`<button class="opt" onclick="vtc('${id}',${i})">${c}</button>`).join('')}<div class="mm">गुप्त मतदान – तुमचे मत नोंदवा.</div></div>`}
+function vtc(id,i){const box=$(id);if(box.dataset.done)return;box.dataset.done=1;const base=JSON.parse(box.dataset.base);base[i]++;const names=[...box.querySelectorAll('.opt')].map(b=>b.textContent);const tot=base.reduce((a,b)=>a+b,0);const mx=Math.max(...base);const w=base.indexOf(mx);
+ box.querySelector('.mm').innerHTML=`<div class="msg ok">तुमचे मत नोंदले. निकाल (एकूण ${tot} मते):</div>`+base.map((v,j)=>`<div style="margin:4px 0">${names[j]} — ${v} मते<div style="background:#fde68a;height:10px;border-radius:5px;width:${Math.round(v/mx*100)}%"></div></div>`).join('')+`<div class="msg in">🏆 बहुमत : <b>${names[w]}</b> विजयी. (लोकशाहीत बहुमताने निर्णय होतो.)</div>`;LS.pts++;updProg()}
+/* ---------- 1. शिकू या ---------- */
+let LS={s:0,pts:0};
+function updProg(){const p=$('pb');if(p)p.style.width=Math.round((LS.s+1)/SECS.length*100)+'%';const s=$('pts');if(s)s.textContent='⭐ '+LS.pts}
+function vLearn(m){const S=SECS[LS.s];
+ if(S.bare){m.innerHTML=`<button class="back" onclick="go('home')">← मुख्य पान</button><div class="card" style="padding:0;overflow:hidden">${S.h()}</div>`;return}
+ m.innerHTML=`<button class="back" onclick="go('home')">← मुख्य पान</button>
+ <div class="card"><div style="display:flex;justify-content:space-between"><span style="font-weight:700;color:var(--mut)">पायरी ${LS.s+1} / ${SECS.length}</span><span id="pts" style="font-weight:700">⭐ ${LS.pts}</span></div><div class="prog"><i id="pb" style="width:${Math.round((LS.s+1)/SECS.length*100)}%"></i></div>
+ ${sx(S.say)}<h2>${S.t}</h2>${S.h()}
+ <div class="nav"><button class="btn ln" ${LS.s==0?'disabled':''} onclick="LS.s--;draw();window.scrollTo({top:0})">◀ मागे</button><button class="btn" ${LS.s==SECS.length-1?'disabled':''} onclick="LS.s++;draw();window.scrollTo({top:0})">पुढे ▶</button></div></div>`;
+ if(LS.s==SECS.length-1)$('fin').innerHTML='🏆 पाठ पूर्ण! आता ‘MCQ’ आणि ‘स्वाध्याय’ सोडवा.'}
+
+/* ---------- print machinery ---------- */
+function wrapDoc(inner,forPrint){return `<div class="doc"><table class="pg"><thead><tr><td><div class="sph"></div></td></tr></thead><tbody><tr><td>${inner}</td></tr></tbody><tfoot><tr><td><div class="spf"></div></td></tr></tfoot></table></div>`}
+const WMK='<div class="wmk"><div>जी.एम.नदाफ केंद्रप्रमुख गिरगांव ता.जत</div><div>7972568986</div></div>';
+const PFOOT=`<div class="pfoot"><span>रचनाकार : जी.एम.नदाफ, केंद्रप्रमुख गिरगांव ता.जत · 📞 7972568986</span><span>${L.foot}</span></div>`;
+function togPdf(){const p=$('pdfp');if(!p)return;const s=p.style.display=='none';p.style.display=s?'block':'none';if(s)p.scrollIntoView({behavior:'smooth'})}
+function doPrint(html){$('printHost').innerHTML=WMK+PFOOT+wrapDoc(html);window.print()}
+window.addEventListener('afterprint',()=>{$('printHost').innerHTML=''});
+function dHead(t,marks,sch){return `<div class="dh"><div class="r"><b>${sch?esc(sch):'शाळा: ________________________'}</b><span>${L.cls}</span></div><div class="r"><span>नाव : <i class="ln" style="min-width:55mm"></i></span><span>दिनांक : <i class="ln" style="min-width:26mm"></i></span><span>गुण : &nbsp;&nbsp;&nbsp;&nbsp;/ ${marks}</span></div></div><h3 class="dt">${t}</h3><div class="ds">${L.name}</div>`}
+const wl=n=>'<div class="wl"></div>'.repeat(n);
+let CURDOC='';
+function showPrev(html){CURDOC=html;$('prev').innerHTML=wrapDoc(html)}
+function toolbar(opts){return `<div class="card"><div class="tool">${opts}</div></div>`}
+const seedBox=(v)=>`<label>संच क्र.</label><input type="number" id="seed" min="1" max="99999" value="${v}" style="width:90px" onchange="regen()"><button class="btn gr" onclick="$('seed').value=1+Math.floor(Math.random()*99999);regen()">🎲 नवा संच</button>`;
+const schoolBox=`<label>शाळा:</label><input type="text" id="sch" placeholder="(ऐच्छिक)" style="width:170px" oninput="regen()">`;
+const keyBox=`<label><input type="checkbox" id="ky" checked onchange="regen()"> उत्तरसूची जोडा</label>`;
+const prBtn=`<button class="btn bl" onclick="doPrint(CURDOC)">📄 PDF / प्रिंट</button>`;
+const prHelp=`<div class="msg in">प्रिंट विंडोमध्ये ‘Save as PDF’ निवडा, कागद A4, Margins ‘None’ ठेवा. प्रत्येक वेळी नवा संच क्र. = नवे प्रश्न; तोच क्रमांक = तोच संच.</div>`;
+let REGEN=()=>{};function regen(){REGEN()}
+
+/* ---------- 2. MCQ ---------- */
+let MC={qs:[],i:0,sc:0,wrong:[],done:false};
+function mcStart(){const R=rng(Date.now()%100000);MC={qs:shuf(MCQ,R).slice(0,10).map(q=>mkq(q,R)),i:0,sc:0,wrong:[],done:false};drawMc()}
+function mkq(q,R){const o=shuf([[q[1],1],[q[2],0],[q[3],0],[q[4],0]],R);return{q:q[0],o:o.map(x=>x[0]),a:o.findIndex(x=>x[1]),e:q[5]}}
+function vMcq(m){m.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px"><button class="back" style="margin:0" onclick="go('home')">← मुख्य पान</button><button class="btn bl" style="margin:0" onclick="togPdf()">📄 PDF तयार करा</button></div><div class="card" id="mcb"></div>
+ <div class="card" id="pdfp" style="display:none"><h2>🖨 MCQ चाचणी (A4 PDF)</h2><div class="tool"><label>प्रश्न:</label><select id="mn" onchange="regen()"><option>10</option><option selected>15</option><option>20</option><option>25</option></select>${seedBox(301)}${schoolBox}${keyBox}${prBtn}</div>${prHelp}<div class="paper" id="prev"></div></div>`;
+ REGEN=genMcq;mcStart();genMcq()}
+function drawMc(){const b=$('mcb');if(!b)return;
+ if(MC.done){b.innerHTML=`<h2>📊 निकाल : ${MC.sc} / ${MC.qs.length}</h2><div class="msg ${MC.sc>=8?'ok':'in'}">${MC.sc>=9?'उत्तम! 🏆':MC.sc>=7?'छान! 👍':'पुन्हा सराव करा 💪'}</div>${MC.wrong.length?'<h3>चुकलेले प्रश्न:</h3>'+MC.wrong.map(w=>`<div class="qcard"><b>${w.q}</b><div class="ans show">✔ ${w.o[w.a]}\n${w.e}</div></div>`).join(''):''}<button class="btn gr" onclick="mcStart()">🔄 नवे 10 प्रश्न</button>`;return}
+ const q=MC.qs[MC.i];b.innerHTML=`<h2>❓ सराव (${MC.i+1}/${MC.qs.length}) <small style="float:right">⭐ ${MC.sc}</small></h2><div class="prog"><i style="width:${MC.i/MC.qs.length*100}%"></i></div><p><b>${q.q}</b></p>${q.o.map((o,i)=>`<button class="opt" onclick="mcA(${i},this)">${LET[i]}) ${o}</button>`).join('')}<div id="mcm"></div>`}
+function mcA(i,b){const q=MC.qs[MC.i];if(q.d)return;q.d=1;const bs=document.querySelectorAll('#mcb .opt');bs[q.a].classList.add('ok');if(i!=q.a)b.classList.add('no');if(i==q.a)MC.sc++;else MC.wrong.push(q);
+ $('mcm').innerHTML=`<div class="msg ${i==q.a?'ok':'no'}">${i==q.a?'🎉 बरोबर!':'✘ चुकले.'} ${q.e}</div><button class="btn" onclick="MC.i++;if(MC.i>=MC.qs.length)MC.done=true;drawMc()">${MC.i==MC.qs.length-1?'निकाल पाहा':'पुढचा प्रश्न ▶'}</button>`}
+function genMcq(){const n=+$('mn').value,seed=+$('seed').value||1,R=rng(seed);const qs=shuf(MCQ,R).slice(0,n).map(q=>mkq(q,R));
+ let h=dHead('MCQ चाचणी',n,$('sch').value.trim())+`<div class="ds">संच क्र. ${seed} · योग्य पर्याय निवडून उत्तर कंसात लिहा.</div>`+
+ qs.map((q,i)=>`<div class="qb"><div>${i+1}. ${q.q} <b>( &nbsp;&nbsp;&nbsp; )</b></div><div class="opts">${q.o.map((o,j)=>`<span>${LET[j]}) ${o}</span>`).join('')}</div></div>`).join('');
+ if($('ky').checked)h+=`<div class="qb key"><b>उत्तरसूची (शिक्षकांसाठी) – संच ${seed}</b><div class="opts" style="grid-template-columns:repeat(5,1fr);margin-left:0">${qs.map((q,i)=>`<span>${i+1}) ${LET[q.a]}</span>`).join('')}</div></div>`;
+ showPrev(h)}
+
+/* ---------- 3. स्वाध्याय ---------- */
+let SWT='a';
+function vSw(m){m.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px"><button class="back" style="margin:0" onclick="go('home')">← मुख्य पान</button><button class="btn bl" style="margin:0" onclick="togPdf()">📄 PDF तयार करा</button></div>
+ <div class="card"><div class="chips"><button class="chip ${SWT=='a'?'on':''}" onclick="SWT='a';vSw($('main'))">अ) पुस्तकातील स्वाध्याय</button><button class="chip ${SWT=='b'?'on':''}" onclick="SWT='b';vSw($('main'))">ब) अधिक स्वाध्याय (पुस्तकाबाहेरील)</button></div></div><div id="swb"></div>`;
+ SWT=='a'?swA($('swb')):swB($('swb'))}
+function ansBtn(id){return `<button class="btn ln" onclick="$('${id}').classList.toggle('show')">👁 उत्तर पाहा / लपवा</button>`}
+const IMG=(k,c)=>`<figure style="margin:8px 0;text-align:center"><img src="${IM[k]}" style="width:100%;max-width:420px;border-radius:14px;box-shadow:0 2px 8px #0003" alt=""><figcaption style="font-size:14px;color:#78716c">${c||''}</figcaption></figure>`;
+let SWID=0;
+const mk=c=>c&&typeof c=='object'?`<span class="ans2">${c.a}</span>`:(c==null?'':c);
+function swBlock(b,bi){let h=`<div class="card"><h2>${b.h}</h2>`;const id=x=>`sw${bi}_${x}`;
+ if(b.t=='mcq')h+=b.items.map((it,i)=>`<div class="qcard" id="${id(i)}"><div>${i+1}. ${it[0]}</div>${it[1].map((o,j)=>`<button class="opt" onclick="swM('${id(i)}',this,${j==it[2]},'${esc(it[1][it[2]]).replace(/'/g,"\\'")}')">${LET[j]}) ${o}</button>`).join('')}<div class="mm"></div></div>`).join('');
+ else if(b.t=='qa')h+=b.items.map((it,i)=>`<div class="qcard">${i+1}. ${it[0]}<br>${ansBtn(id('a'+i))}<div class="ans" id="${id('a'+i)}">✔ ${it[1]}</div></div>`).join('');
+ else if(b.t=='match')h+=`<table class="t"><tr><th>‘अ’ गट</th><th>उत्तर</th></tr>${b.L.map((x,i)=>`<tr><td style="text-align:left">${i+1}) ${x}</td><td><select id="${id('s'+i)}"><option value="">–</option>${b.R.map((r,j)=>`<option>${LET[j]}</option>`).join('')}</select></td></tr>`).join('')}</table><b>‘ब’ गट :</b><ul style="list-style:none;padding-left:4px">${b.R.map((r,j)=>`<li>${LET[j]}) ${r}</li>`).join('')}</ul><button class="btn gr" onclick="swMt(${bi})">तपासा</button><div id="${id('m')}"></div>`;
+ else if(b.t=='table')h+=`<table class="t"><tr>${b.head.map(x=>`<th>${x}</th>`).join('')}</tr>${b.rows.map(r=>`<tr>${r.map(c=>`<td>${mk(c)}</td>`).join('')}</tr>`).join('')}</table><button class="btn ln" onclick="document.querySelectorAll('#sw${bi}c .ans2').forEach(e=>e.classList.toggle('rev'))">👁 उत्तरे दाखवा</button>`.replace('<table class="t">',`<div id="sw${bi}c"><table class="t">`).replace('</table>','</table></div>');
+ else if(b.t=='order')h+=ordGame('क्रमाने लावा',b.items)+`<div class="msg in">योग्य क्रम : ${b.items.map((x,i)=>`${i+1}) ${x}`).join(' → ')}</div>`;
+ else if(b.t=='img')h+=b.items.map((it,i)=>`<div class="qcard">${qimg(it[0])}${i+1}. ${it[2]||''}<br>${ansBtn(id('a'+i))}<div class="ans" id="${id('a'+i)}">✔ ${it[1]}</div></div>`).join('');
+ else if(b.t=='concept')h+=`<div style="text-align:center"><b>${b.center}</b><br>⬇<div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap">${b.leaves.map(x=>`<span class="ans2" style="padding:6px 10px">${x}</span>`).join('')}</div></div><div id="sw${bi}c"></div><button class="btn ln" onclick="document.querySelectorAll('.ans2').forEach(e=>e.classList.toggle('rev'))">👁 उत्तरे दाखवा</button>`;
+ else if(b.t=='text')h+=`<ul>${b.items.map(x=>`<li>${x}</li>`).join('')}</ul>`;
+ return h+'</div>'}
+function swM(id,b,ok,a){const box=$(id);if(box.dataset.d)return;b.classList.add(ok?'ok':'no');if(ok)box.dataset.d=1;box.querySelector('.mm').innerHTML=ok?`<div class="msg ok">🎉 बरोबर!</div>`:`<div class="msg no">✘ पुन्हा प्रयत्न करा.</div>`}
+function swMt(bi){const b=SWB[bi];let ok=0;b.L.forEach((x,i)=>{const s=$(`sw${bi}_s${i}`),g=s.value===LET[b.A[i]];if(g)ok++;s.style.background=s.value?(g?'#dcfce7':'#fee2e2'):''});$(`sw${bi}_m`).innerHTML=ok==b.L.length?'<div class="msg ok">🎉 सर्व जोड्या बरोबर!</div>':`<div class="msg in">${ok}/${b.L.length} बरोबर. लाल रंगाच्या जोड्या बदला.</div>`}
+function swA(b){let h=SWB.map((x,i)=>swBlock(x,i)).join('');
+ h+=`<div class="card" id="pdfp" style="display:none"><h2>🖨 पुस्तकातील स्वाध्याय – PDF</h2><div class="tool">${schoolBox}<label><input type="checkbox" id="ky" checked onchange="regen()"> आदर्श उत्तरे जोडा</label>${prBtn}</div>${prHelp}<div class="paper" id="prev"></div></div>`;
+ b.innerHTML=`<style>.ans2{background:#e5e7eb;color:#e5e7eb;border-radius:6px;padding:0 6px;user-select:none}.ans2.rev{background:#dcfce7;color:#166534;font-weight:700}</style>`+h;REGEN=genSwA;genSwA()}
+function genSwA(){const ky=$('ky').checked,sc=$('sch').value.trim();const R=rng(11);
+ let h=dHead('स्वाध्याय (पाठ्यपुस्तकातील)','—',sc);const A=t=>`<span class="a">${t}</span>`;
+ SWB.forEach(b=>{h+=`<div class="qh">${b.h}</div>`;
+  if(b.t=='mcq')h+=b.items.map((it,i)=>`<div class="qb"><div>${i+1}. ${it[0]} <b>( &nbsp;&nbsp; )</b></div><div class="opts">${it[1].map((o,j)=>`<span>${LET[j]}) ${o}</span>`).join('')}</div>${ky?`<div class="a">उत्तर : ${LET[it[2]]}) ${it[1][it[2]]}</div>`:''}</div>`).join('');
+  else if(b.t=='qa')h+=b.items.map((it,i)=>b.lines>1?`<div class="qb">${i+1}. ${it[0]}${ky?`<div class="a"><pre>${it[1]}</pre></div>`:wl(b.lines)}</div>`:`<div class="qb">${i+1}. ${it[0]} ${ky?A('→ '+it[1]):'<i class="ln" style="min-width:45mm"></i>'}</div>`).join('');
+  else if(b.t=='match')h+=`<table class="w"><tr><th style="width:50%">‘अ’ गट</th><th>‘ब’ गट</th></tr>${b.L.map((x,i)=>`<tr><td>${i+1}) ${x} &nbsp;&nbsp; ( ${ky?A(LET[b.A[i]]):'&nbsp;&nbsp;'} )</td><td>${b.R[i]!=null?LET[i]+') '+b.R[i]:''}</td></tr>`).join('')}</table>`;
+  else if(b.t=='table')h+=`<table class="w"><tr>${b.head.map(x=>`<th>${x}</th>`).join('')}</tr>${b.rows.map(r=>`<tr>${r.map(c=>`<td>${c&&typeof c=='object'?(ky?A(c.a):'&nbsp;<br>&nbsp;'):(c==null?'':c)}</td>`).join('')}</tr>`).join('')}</table>`;
+  else if(b.t=='order'){const idx=shuf(b.items.map((x,i)=>i),R);h+=idx.map((j,i)=>`<div class="qb">${i+1}. ${b.items[j]}</div>`).join('')+(ky?A('योग्य क्रम : '+b.items.map((x,i)=>idx.indexOf(i)+1).join(' → ')):wl(2))}
+  else if(b.t=='img')h+=b.items.map((it,i)=>`<div class="qb"><img src="${IM[it[0]]}" style="height:30mm;border-radius:2mm"> ${i+1}. ${it[2]||''} ${ky?A('→ '+it[1]):'<i class="ln" style="min-width:45mm"></i>'}</div>`).join('');
+  else if(b.t=='concept')h+=`<div style="text-align:center"><b style="border:1.2px solid #000;padding:2px 10px">${b.center}</b><div style="display:flex;gap:8px;justify-content:center;margin-top:6px">${b.leaves.map(x=>`<span style="border:1.2px solid #000;padding:6px 12px;min-width:30mm">${ky?A(x):'&nbsp;'}</span>`).join('')}</div></div>`;
+  else if(b.t=='text')h+=`<ul>${b.items.map(x=>`<li>${x}</li>`).join('')}</ul>`;
+  if(b.t=='qb'||b.p)h+=''; });
+ showPrev(h)}
+
+let SB=401;
+function sbData(seed){const R=rng(seed);const fb=shuf(FB,R).slice(0,6),mt=shuf(MT,R).slice(0,5),mtB=shuf(mt.map((x,i)=>[x[1],i]),R),tf=shuf(TF,R).slice(0,6),os=shuf(OS,R).slice(0,5),sa=shuf(SA,R).slice(0,3);return{fb,mt,mtB,tf,os,sa}}
+function swB(b){b.innerHTML=`<div id="sbq"></div><div class="card" id="pdfp" style="display:none"><h2>🖨 अधिक स्वाध्याय – PDF</h2><div class="tool">${schoolBox}${keyBox}${prBtn}</div>${prHelp}<div class="paper" id="prev"></div></div>`;REGEN=()=>{genSwB()};renderSbq();genSwB()}
+function newSb(){SB=1+Math.floor(Math.random()*99999);renderSbq();genSwB()}
+function sbRev(id){$(id).classList.toggle('show')}
+function sbTf(i,v,t,c,b){const ok=(v==t);b.parentNode.querySelectorAll('.opt').forEach(x=>x.classList.remove('ok','no'));b.classList.add(ok?'ok':'no');$('tf'+i).innerHTML=ok?`<span class="msg ok">🎉 बरोबर! ${t?'हे विधान बरोबर आहे.':'हे विधान चूक आहे. बरोबर : '+c}</span>`:`<span class="msg no">✘ पुन्हा विचार करा.</span>`}
+function sbMt(){const d=sbData(SB);let ok=0;d.mt.forEach((x,i)=>{const s=$('sm'+i),good=LET[d.mtB.findIndex(y=>y[1]==i)];const g=s.value===good;if(g)ok++;s.style.background=s.value?(g?'#dcfce7':'#fee2e2'):''});$('smm').innerHTML=ok==d.mt.length?'<div class="msg ok">🎉 सर्व जोड्या बरोबर!</div>':`<div class="msg in">${ok}/${d.mt.length} बरोबर. लाल रंगाच्या जोड्या बदला.</div>`}
+function renderSbq(){const d=sbData(SB);let h=`<div class="card"><h2>✍️ अधिक स्वाध्याय · संच क्र. ${SB}</h2><button class="btn gr" onclick="newSb()">🎲 नवे प्रश्न</button></div>`;
+ h+=`<div class="card"><h2>प्र.1 रिकाम्या जागा भरा.</h2>${d.fb.map((x,i)=>`<div class="qcard">${i+1}) ${x[0]}<br>${ansBtn('f'+i)}<div class="ans" id="f${i}">✔ ${x[1]}</div></div>`).join('')}</div>`;
+ h+=`<div class="card"><h2>प्र.2 जोड्या जुळवा.</h2><table class="t"><tr><th>‘अ’ गट</th><th>उत्तर</th></tr>${d.mt.map((x,i)=>`<tr><td style="text-align:left">${i+1}) ${x[0]}</td><td><select id="sm${i}"><option value="">–</option>${LET.concat(['इ']).slice(0,5).map(l=>`<option>${l}</option>`).join('')}</select></td></tr>`).join('')}</table><b>‘ब’ गट :</b><ul style="list-style:none;padding-left:4px">${d.mtB.map((y,j)=>`<li>${LET.concat(['इ'])[j]}) ${y[0]}</li>`).join('')}</ul><button class="btn gr" onclick="sbMt()">तपासा</button><div id="smm"></div></div>`;
+ h+=`<div class="card"><h2>प्र.3 बरोबर की चूक?</h2>${d.tf.map((x,i)=>`<div class="qcard">${i+1}. ${x[0]}<div><button class="opt" style="display:inline-block;width:auto" onclick="sbTf(${i},1,${x[1]},'${esc(x[2]).replace(/'/g,"\\'")}',this)">✔ बरोबर</button> <button class="opt" style="display:inline-block;width:auto" onclick="sbTf(${i},0,${x[1]},'${esc(x[2]).replace(/'/g,"\\'")}',this)">✘ चूक</button></div><div id="tf${i}"></div></div>`).join('')}</div>`;
+ h+=`<div class="card"><h2>प्र.4 एका वाक्यात उत्तरे लिहा.</h2>${d.os.map((x,i)=>`<div class="qcard">${i+1}. ${x[0]}<br>${ansBtn('o4'+i)}<div class="ans" id="o4${i}">✔ ${x[1]}</div></div>`).join('')}</div>`;
+ h+=`<div class="card"><h2>प्र.5 थोडक्यात उत्तरे लिहा.</h2>${d.sa.map((x,i)=>`<div class="qcard">${i+1}. ${x[0]}<br>${ansBtn('s5'+i)}<div class="ans" id="s5${i}">${x[1]}</div></div>`).join('')}</div>`;
+ $('sbq').innerHTML=h}
+function genSwB(){const seed=SB,ky=$('ky').checked,sc=$('sch').value.trim();const {fb,mt,mtB,tf,os,sa}=sbData(seed);
+ let h=dHead('अधिक स्वाध्याय',30,sc)+`<div class="ds">संच क्र. ${seed}</div>`;
+ h+=`<div class="qh">प्र.1 रिकाम्या जागा भरा. (6 गुण)</div>`+fb.map((x,i)=>`<div class="qb">${i+1}) ${x[0]}</div>`).join('');
+ h+=`<div class="qh">प्र.2 जोड्या जुळवा. (5 गुण)</div><table class="w"><tr><th style="width:50%">‘अ’ गट</th><th>‘ब’ गट</th></tr>${mt.map((x,i)=>`<tr><td>${i+1}) ${x[0]} &nbsp;&nbsp; ( &nbsp;&nbsp; )</td><td>${LET.concat(['इ'])[i]}) ${mtB[i][0]}</td></tr>`).join('')}</table>`;
+ h+=`<div class="qh">प्र.3 खालील विधाने बरोबर की चूक ते लिहा. चूक असल्यास दुरुस्त करून लिहा. (6 गुण)</div>`+tf.map((x,i)=>`<div class="qb">${i+1}. ${x[0]} <b>( &nbsp;&nbsp;&nbsp;&nbsp; )</b></div>`).join('');
+ h+=`<div class="qh">प्र.4 एका वाक्यात उत्तरे लिहा. (5 गुण)</div>`+os.map((x,i)=>`<div class="qb">${i+1}. ${x[0]}${wl(1)}</div>`).join('');
+ h+=`<div class="qh">प्र.5 थोडक्यात उत्तरे लिहा. (8 गुण)</div>`+sa.map((x,i)=>`<div class="qb">${i+1}. ${x[0]}${wl(4)}</div>`).join('');
+ if(ky){const mk=mt.map((x,i)=>`${i+1} → ${LET.concat(['इ'])[mtB.findIndex(y=>y[1]==i)]}`);
+  h+=`<div class="qb key"><b>उत्तरसूची (शिक्षकांसाठी) – संच ${seed}</b><div class="qh">प्र.1</div>${fb.map((x,i)=>`<div>${i+1}) ${x[1]}</div>`).join('')}<div class="qh">प्र.2</div><div>${mk.join(' &nbsp; ')}</div><div class="qh">प्र.3</div>${tf.map((x,i)=>`<div>${i+1}) ${x[1]?'बरोबर':'चूक – '+x[2]}</div>`).join('')}<div class="qh">प्र.4</div>${os.map((x,i)=>`<div>${i+1}) ${x[1]}</div>`).join('')}<div class="qh">प्र.5 (मार्गदर्शक मुद्दे)</div>${sa.map((x,i)=>`<div class="qb">${i+1}) <pre>${x[1]}</pre></div>`).join('')}</div>`}
+ showPrev(h)}
+
+/* ---------- 4. HOTS ---------- */
+function vHots(m){m.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px"><button class="back" style="margin:0" onclick="go('home')">← मुख्य पान</button><button class="btn bl" style="margin:0" onclick="togPdf()">📄 PDF तयार करा</button></div>
+ <div class="card"><h2>🧠 उपयोजनात्मक / उच्चस्तरीय विचार प्रश्न</h2><p>पाठाच्या आशयावर आधारित पण पाठ्यपुस्तकाबाहेरील प्रश्न. स्वतः उत्तर लिहून मग ‘मार्गदर्शक मुद्दे’ पाहा.</p>
+ ${HOTS.map((x,i)=>`<div class="qcard"><span class="tag">${x[0]}</span><b>${i+1}. ${x[1]}</b><br>${ansBtn('hq'+i)}<div class="ans" id="hq${i}">💡 मार्गदर्शक मुद्दे:\n${x[2]}</div></div>`).join('')}</div>
+ <div class="card" id="pdfp" style="display:none"><h2>🖨 HOTS प्रश्नपत्रिका (A4 PDF)</h2><div class="tool"><label>प्रश्न:</label><select id="hn" onchange="regen()"><option>4</option><option selected>6</option><option>8</option></select>${seedBox(501)}${schoolBox}${keyBox}${prBtn}</div>${prHelp}<div class="paper" id="prev"></div></div>`;
+ REGEN=genHots;genHots()}
+function genHots(){const seed=+$('seed').value||1,R=rng(seed),n=+$('hn').value,ky=$('ky').checked,sc=$('sch').value.trim();const qs=shuf(HOTS,R).slice(0,n);
+ let h=dHead('उपयोजनात्मक / उच्चस्तरीय विचार प्रश्न',n*3,sc)+`<div class="ds">संच क्र. ${seed} · स्वतःच्या शब्दांत सविस्तर उत्तरे लिहा.</div>`;
+ h+=qs.map((x,i)=>`<div class="qb"><div class="qh">प्र.${i+1} <small>[${x[0]}]</small> ${x[1]} (3 गुण)</div>${wl(6)}</div>`).join('');
+ if(ky)h+=`<div class="qb key"><b>मार्गदर्शक मुद्दे (शिक्षकांसाठी) – संच ${seed}</b>${qs.map((x,i)=>`<div class="qb"><b>प्र.${i+1}</b><pre>${x[2]}</pre></div>`).join('')}</div>`;
+ showPrev(h)}
+
+/* ---------- boot ---------- */
+document.title=L.name;$('hdr').textContent=L.name;
+const h0=location.hash.replace('#','');if(['learn','mcq','sw','hots'].includes(h0))view=h0;
+draw();
+</script>
+</body>
+</html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>इतिहास</title>
+<style>
+:root{--b:#7c2d12;--b2:#c2410c;--g:#15803d;--bl:#1d4ed8;--bg:#fff7ed;--ink:#1c1917;--mut:#78716c;--card:#fff}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Devanagari","Mukta","Segoe UI",system-ui,sans-serif;font-size:17px;line-height:1.55}
+header{background:linear-gradient(135deg,#9a3412,#c2410c 55%,#b45309);color:#fff;padding:14px 14px 12px}
+header h1{margin:0;font-size:20px;line-height:1.3}header small{opacity:.92}
+.wrap{max-width:820px;margin:0 auto;padding:12px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:520px){.hc{padding:12px 10px}.hc .ic{font-size:28px}.hc h2{font-size:16px}.hc p{font-size:12.5px}}
+.hc{background:var(--card);border-radius:18px;padding:16px;box-shadow:0 2px 8px #0002;cursor:pointer;border:2px solid transparent;text-align:left;font:inherit;color:inherit}
+.hc:active{transform:scale(.98)}.hc:hover{border-color:var(--b2)}
+.hc .ic{font-size:34px}.hc h2{margin:4px 0 2px;font-size:20px;color:var(--b)}.hc p{margin:0;color:var(--mut);font-size:14.5px}
+.card{background:var(--card);border-radius:16px;padding:14px;margin:0 0 12px;box-shadow:0 1px 6px #0001}
+.card h2{margin:0 0 6px;font-size:20px;color:var(--b)}
+.card h3{margin:10px 0 4px;font-size:17px;color:var(--b2)}
+.back{border:0;background:#fed7aa;color:#7c2d12;border-radius:999px;padding:8px 16px;font:inherit;font-weight:700;cursor:pointer;margin:0 0 10px}
+.btn{display:inline-block;border:0;border-radius:12px;padding:10px 16px;font:inherit;font-weight:700;background:var(--b2);color:#fff;cursor:pointer;margin:4px 4px 4px 0}
+.btn.gr{background:var(--g)}.btn.bl{background:var(--bl)}.btn.ln{background:#e7e5e4;color:#292524}.btn:disabled{opacity:.4}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.chip{padding:7px 13px;border-radius:999px;background:#ffedd5;font-weight:700;border:2px solid transparent;cursor:pointer;font:inherit;font-weight:700;color:#7c2d12}
+.chip.on{background:#fff;border-color:var(--b2)}
+.info{background:#fef3c7;border-left:5px solid #f59e0b;border-radius:8px;padding:8px 10px;margin:6px 0;min-height:44px}
+.key{background:#ecfccb;border-left:5px solid #65a30d;border-radius:8px;padding:8px 10px;margin:8px 0}
+.say{float:right;border:0;background:#ffedd5;border-radius:999px;padding:6px 12px;font:inherit;font-weight:700;color:var(--b);cursor:pointer}
+.prog{height:8px;background:#fed7aa;border-radius:99px;overflow:hidden;margin:4px 0 10px}.prog i{display:block;height:100%;background:var(--g);transition:width .3s}
+.nav{display:flex;justify-content:space-between;gap:8px;margin-top:10px;align-items:center}
+.flip{background:#e0f2fe;border-radius:12px;padding:10px 12px;margin:6px 0;cursor:pointer;border:2px dashed #38bdf8}
+.flip .fa{display:none;margin-top:6px;font-weight:700;color:#0c4a6e}.flip.on .fa{display:block}.flip .fq{font-weight:700}
+.opt{display:block;width:100%;text-align:left;border:2px solid #d6d3d1;background:#fff;border-radius:12px;padding:9px 12px;margin:6px 0;font:inherit;cursor:pointer}
+.opt.ok{background:#dcfce7;border-color:#16a34a}.opt.no{background:#fee2e2;border-color:#dc2626}
+.msg{margin-top:6px;padding:8px 10px;border-radius:10px;font-weight:600}.msg.ok{background:#dcfce7;color:#166534}.msg.no{background:#fee2e2;color:#991b1b}.msg.in{background:#fef9c3;color:#713f12}
+.mini{border:2px solid #fdba74;border-radius:14px;padding:10px;margin-top:12px;background:#fffbeb}
+table.t{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0}table.t th,table.t td{border:1.5px solid #a8a29e;padding:6px;text-align:center}table.t th{background:#ffedd5}
+select,input[type=text],input[type=number]{font:inherit;padding:6px;border-radius:8px;border:2px solid #a8a29e;max-width:100%}
+.ord{display:flex;flex-direction:column;gap:6px;margin:6px 0}.ord button{text-align:left}
+.tool{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:6px 0}.tool label{font-weight:700}
+.ans{background:#f0fdf4;border-left:5px solid #22c55e;border-radius:8px;padding:8px 10px;margin:6px 0;white-space:pre-line;display:none}
+.ans.show{display:block}
+.qcard{border:1.5px solid #e7e5e4;border-radius:12px;padding:10px;margin:8px 0}
+.tag{display:inline-block;background:#fde68a;color:#78350f;border-radius:99px;padding:1px 10px;font-size:13px;font-weight:700;margin-right:6px}
+.paper{background:#fff;border:1px solid #a8a29e;box-shadow:0 2px 10px #0003;margin:10px auto 0;padding:8px 10px;max-width:210mm;overflow:auto;font-size:14px;
+ background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='360' height='260'><text x='20' y='150' font-size='20' font-weight='700' fill='%23000' fill-opacity='0.055' transform='rotate(-28 180 130)' font-family='sans-serif'>जी.एम.नदाफ केंद्रप्रमुख गिरगांव ता.जत 7972568986</text></svg>")}
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}.sc{background:#fff;border:2px dashed #f59e0b;border-radius:14px;padding:8px;text-align:center;cursor:pointer;min-height:110px}.sc .sy{font-size:44px;line-height:1.2}.sc .sb{display:none}.sc.on .sf{display:none}.sc.on .sb{display:block;color:#14532d}.sc.on{border-style:solid;border-color:#16a34a;background:#f0fdf4}.sf{color:#78716c;font-weight:700}
+.appfoot{text-align:center;font-size:13px;color:#57534e;padding:14px 8px 24px;border-top:1px solid #d6d3d1;margin-top:10px}
+/* document (preview + print) */
+.doc{font-size:11.5pt;color:#000;line-height:1.4}
+.doc .dh{border:1.5px solid #000;padding:5px 8px;margin-bottom:6px}.doc .r{display:flex;justify-content:space-between;gap:10px;margin:3px 0;flex-wrap:wrap}
+.doc .ln{display:inline-block;border-bottom:1px solid #000;min-width:30mm;height:1em}
+.doc .dt{margin:4px 0 0;text-align:center;font-size:15pt}.doc .ds{text-align:center;font-size:10pt;margin-bottom:6px}
+.doc .qh{font-weight:700;margin:9px 0 3px}.doc .qb{break-inside:avoid;margin:4px 0}
+.doc .wl{border-bottom:1px solid #777;height:8mm}
+.doc table.w{border-collapse:collapse;width:100%}.doc table.w th,.doc table.w td{border:1.2px solid #000;padding:3px 6px;text-align:left}.doc table.w th{background:#eee}
+.doc .opts{display:grid;grid-template-columns:1fr 1fr;gap:1px 14px;margin:2px 0 0 18px}
+.doc .key{background:none;border:0;border-top:2px dashed #000;border-radius:0;margin-top:12px;padding-top:6px}
+.doc .a{color:#14532d;font-weight:700}
+.doc pre{font:inherit;white-space:pre-wrap;margin:2px 0}
+table.pg{width:100%;border-collapse:collapse}table.pg td{padding:0;border:0}
+.sph,.spf{height:0}
+#printHost{display:none}
+.wmk,.pfoot{display:none}
+@page{size:A4;margin:0}
+@media print{
+ body{background:#fff}
+ .app{display:none!important}
+ #printHost{display:block}
+ #printHost .doc{padding:0 14mm}
+ .sph{height:13mm}.spf{height:18mm}
+ .wmk{display:block;position:fixed;left:0;right:0;top:46%;transform:translateY(-50%) rotate(-30deg);text-align:center;font-size:30pt;font-weight:700;line-height:1.3;color:#000;opacity:.08;z-index:-1;pointer-events:none;-webkit-print-color-adjust:exact;print-color-adjust:exact;white-space:nowrap}
+ .wmk div:last-child{font-size:24pt}
+ .pfoot{display:flex;justify-content:space-between;gap:10px;position:fixed;left:14mm;right:14mm;bottom:6mm;font-size:8.5pt;color:#333;border-top:1px solid #777;padding-top:2px;background:#fff}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<header><h1 id="hdr">…</h1></header>
+<div class="wrap"><div id="main"></div>
+<div class="appfoot">रचनाकार : जी.एम. नदाफ, केंद्रप्रमुख गिरगांव ता.जत<br>📞 7972568986 · © डिजिटल शिक्षण मंच</div></div>
+</div>
+<div id="printHost"></div>
+<script>
+const IM={};
+
+const MCQ=[["‘parched’ means —", "very dry and hot", "very wet", "very cold", "very loud", "parched = अत्यंत कोरडे व तापलेले."], ["‘drenched’ means —", "completely wet", "slightly dry", "very hot", "very loud", "drenched = पूर्ण भिजलेले (चिंब)."], ["‘streak’ means —", "flash of light", "a drop of rain", "a loud sound", "a small bird", "streak = प्रकाशाचा झोत / झळाळी."], ["‘shimmer’ means —", "shine with soft moving light", "make a loud noise", "become very dry", "fall down", "shimmer = मंद हलणारा प्रकाश चमकणे."], ["‘pit-pat’ is the sound of —", "tapping raindrops", "thunder", "strong wind", "a bell", "pit-pat = टपटप पडणारे थेंब."], ["‘hosed’ means the rivers —", "flowed strongly as if spraying water", "became very dry", "became dark", "went away", "hosed = नळीतून पाणी उडवल्यासारख्या जोरात वाहिल्या."], ["‘thunder’ means —", "a loud rolling sound in the sky", "a bright flash", "a drop of water", "a cold wind", "thunder = ढगांचा गडगडाट."], ["‘lightning’ is —", "a flash of light in the sky during a storm", "a loud sound", "a kind of bird", "a strong wind", "lightning = वीज."], ["‘cheery’ means —", "bright and cheerful", "sad and dull", "angry", "sleepy", "cheery = आनंदी, उल्हसित."], ["‘soaked’ means —", "very wet", "very dry", "very hot", "very tall", "soaked = भिजून गेलेले."], ["‘thirsty’ means needing —", "water", "food", "sleep", "light", "thirsty = तहानलेले."], ["‘hungry’ means needing —", "food", "water", "sleep", "money", "hungry = भुकेले."], ["‘sway’ means —", "move gently from side to side", "jump very high", "sit quietly", "run fast", "sway = हलकेच डोलणे."], ["‘gather’ means —", "come together", "go away", "fall down", "fly high", "gather = एकत्र जमणे."], ["‘hark’ means —", "listen", "run", "sleep", "shout", "hark = ऐका!"], ["A ‘lark’ is a —", "bird", "fish", "tree", "flower", "lark = चंडोल पक्षी."], ["‘bolt’ of lightning means —", "a flash", "a drop", "a cloud", "a river", "bolt = विजेचा लोळ / कडकडाट."], ["The poet of ‘Monsoon’ is —", "Anonymous (unknown)", "Rabindranath Tagore", "Sarojini Naidu", "Arun Kolatkar", "पाठ्यपुस्तकात कवी ‘Anonymous’ (अज्ञात) आहे."], ["The name of the poem is —", "Monsoon", "The Brother", "Homework Machine", "The Crow and the Snake", "कवितेचे नाव Monsoon."], ["The poem describes the —", "coming of rain", "coming of winter", "coming of spring", "coming of night", "कविता पावसाच्या आगमनाबद्दल आहे."], ["Which season is described in the first stanza?", "Summer", "Winter", "Spring", "Autumn", "“Sun is shining hard, land has dried” = उन्हाळा."], ["In the first stanza, the sun is shining —", "hard", "softly", "slowly", "rarely", "“The Sun is shining, oh so hard”."], ["The fields are called —", "hungry", "happy", "tired", "sleepy", "“The fields are hungry”."], ["The rivers are called —", "thirsty", "angry", "noisy", "lazy", "“rivers thirsty”."], ["When rain comes, the peacocks —", "spread feathers and sway", "fly away", "hide in trees", "sleep", "“Feathers spread, the peacocks sway.”"], ["Which bird is named in the poem?", "lark", "crow", "parrot", "sparrow", "“hark the lark”."], ["The sound of raindrops in the poem is —", "Pit, pat", "Tick, tock", "Ding, dong", "Bang, bang", "“Pit, pat! I feel a drop”."], ["‘bark’ rhymes with —", "lark", "wonder", "cheery", "hosed", "bark – lark."], ["‘wonder’ rhymes with —", "thunder", "merry", "yard", "drop", "wonder – thunder."], ["‘merry’ rhymes with —", "cheery", "lark", "yard", "sway", "merry – cheery."], ["‘yard’ rhymes with —", "hard", "soaked", "bark", "way", "yard – hard."], ["‘Repetition’ is a figure of speech in which —", "a word, phrase or line is repeated", "two things are compared using ‘like’", "a thing is given human qualities", "words begin with the same sound", "Repetition = पुनरावृत्ती."], ["Which is an example of repetition?", "Rain, rain come our way", "The Sun is shining", "The trees have bathed", "The Earth is happy", "‘Rain, rain’ दोनदा आले आहे."], ["‘Oh rain, rain come again’ shows the figure of speech —", "Repetition", "Simile", "Metaphor", "Alliteration", "“rain, rain” = Repetition."], ["After the rain, the Earth becomes —", "happy, green and cheery", "dry and brown", "dark and cold", "noisy and dusty", "शेवटच्या कडव्यात पृथ्वी happy, green and cheery."], ["“The trees have ______.”", "bathed", "dried", "parched", "hosed", "“The trees have bathed”."], ["“The land is ______.”", "soaked", "parched", "hungry", "thirsty", "“the land is soaked”."], ["Who is ‘she’ in “she’s on her way”?", "The rain", "The peacock", "The lark", "The Earth", "‘she’ = rain (पाऊस)."], ["How many stanzas are there in the poem?", "Four", "Three", "Five", "Six", "4 कडवी आहेत."], ["How many lines are there in each stanza?", "Four", "Two", "Three", "Six", "प्रत्येक कडव्यात 4 ओळी."], ["The opposite of ‘dry’ is —", "wet", "hot", "hard", "dark", "dry × wet."], ["The opposite of ‘dark’ is —", "bright", "heavy", "wet", "cold", "dark × bright."], ["The opposite of ‘happy’ is —", "sad", "cheery", "glad", "merry", "happy × sad."], ["The opposite of ‘hungry’ is —", "full", "thirsty", "tired", "angry", "hungry × full."], ["A word with the same meaning as ‘cheery’ is —", "happy", "sad", "dry", "dark", "cheery = happy."], ["“The land ______ dried.”", "has", "have", "are", "were", "land एकवचन → has."], ["“The trees ______ bathed.”", "have", "has", "is", "was", "trees अनेकवचन → have."], ["“The fields ______ drenched.”", "are", "is", "has", "was", "fields अनेकवचन → are."], ["Which place word shows dry weather?", "parched land", "drenched fields", "bathed trees", "green Earth", "parched = कोरडीठाक."], ["Which thing is needed in the rainy season?", "umbrella", "sweater", "woollen cap", "heater", "पावसाळ्यात छत्री."], ["Monsoon rains in India come mainly in —", "June to September", "December to February", "March to April", "October to November", "भारतात मान्सून जून–सप्टेंबर."], ["The national bird of India is —", "peacock", "lark", "crow", "sparrow", "राष्ट्रीय पक्षी मोर."], ["If it does not rain for a long time, there will be —", "drought", "flood", "snow", "earthquake", "drought = दुष्काळ."], ["Too much continuous rain can cause —", "flood", "drought", "fire", "dust", "flood = पूर."], ["In ‘dark clouds’, the describing word is —", "dark", "clouds", "in", "the", "dark = विशेषण (describing word)."], ["The mood of the last stanza is —", "joyful", "sad", "angry", "scary", "पृथ्वी आनंदी झाली."], ["‘Bolts of lightning, streak and shimmer’ describes —", "a thunderstorm", "a quiet night", "a sunny day", "a snowfall", "वीज चमकणे."]];
+
+const SW_A=null;
+const FB=[["The Sun is shining, oh so ________.", "hard"], ["The land has dried, it’s so ________.", "parched"], ["The fields are hungry, rivers ________.", "thirsty"], ["Feathers spread, the ________ sway.", "peacocks"], ["The clouds are dark, hark the ________.", "lark"], ["Bolts of lightning, streak and ________.", "shimmer"], ["Pit, pat! I feel a ________.", "drop"], ["The fields are drenched, the land is ________.", "soaked"], ["The trees have ________.", "bathed"], ["The Earth is happy, green and ________.", "cheery"], ["‘Repetition’ is a figure of ________.", "speech"], ["The word ‘rain’ is repeated in the poem. This figure of speech is called ________.", "repetition"], ["The poem ‘Monsoon’ has ________ stanzas.", "four"], ["The poet of the poem ‘Monsoon’ is ________.", "Anonymous"], ["The sound of tapping raindrops is ________.", "pit-pat"]];
+const MT=[["parched", "कोरडीठाक, अत्यंत कोरडे"], ["drenched", "चिंब भिजलेले"], ["shimmer", "मंद हलणारा प्रकाश चमकणे"], ["streak", "प्रकाशाचा झोत / झळाळी"], ["thunder", "ढगांचा गडगडाट"], ["lightning", "वीज"], ["thirsty", "तहानलेले"], ["cheery", "आनंदी, उल्हसित"], ["soaked", "भिजलेले"], ["sway", "डोलणे"]];
+const TF=[["The poem ‘Monsoon’ is about the coming of rain.", 1, ""], ["In the first stanza the Sun is shining softly.", 0, "The Sun is shining ‘hard’ (तीव्र)."], ["The fields are called ‘hungry’ in the poem.", 1, ""], ["The peacocks hide when the rain comes.", 0, "Peacocks spread their feathers and sway."], ["‘Lark’ is a bird.", 1, ""], ["‘Pit, pat’ is the sound of thunder.", 0, "It is the sound of tapping raindrops."], ["After the rain, the Earth is happy, green and cheery.", 1, ""], ["‘Parched’ means completely wet.", 0, "‘Parched’ means very dry; ‘drenched’ means completely wet."], ["‘Rain, rain come our way’ is an example of repetition.", 1, ""], ["The poem has six stanzas.", 0, "The poem has four stanzas."]];
+const OS=[["What is the name of the poem?", "Monsoon."], ["Who is the poet of the poem?", "Anonymous (the poet is unknown)."], ["Which season is mentioned in the first stanza?", "Summer."], ["Which bird is mentioned in the poem?", "The lark."], ["What do the peacocks do when rain comes?", "They spread their feathers and sway."], ["What is the sound of raindrops in the poem?", "Pit, pat."], ["What is the figure of speech ‘Rain, rain’?", "Repetition."], ["Write a rhyming word for ‘hard’.", "yard."]];
+const SA=[["Describe the condition of the land and rivers before the rain.", "• The Sun shines hard; the land is dried and parched.\n• Fields are ‘hungry’, rivers are ‘thirsty’.\n• (मराठी: उन्हाने जमीन कोरडी, नद्या तहानलेल्या.)"], ["How do the peacocks show their joy when rain comes?", "• They spread their feathers.\n• They sway (dance) happily."], ["What happens in the sky just before rain falls?", "• Dark clouds gather.\n• Thunder, bolts of lightning that streak and shimmer."], ["Describe the Earth after the rain.", "• Fields drenched, land soaked.\n• Trees bathed, rivers flow strongly.\n• Earth happy, green and cheery."], ["What is ‘Repetition’? Give an example from the poem.", "• Repetition = a word, phrase or line is repeated.\n• Example: ‘Rain, rain come our way’."], ["Why do we need rain? Write three points.", "• For crops and farmers.\n• For drinking water, rivers, wells.\n• Makes the Earth green and cool."], ["What is the message of the poem?", "• Rain gives new life to the dry Earth.\n• Everyone waits happily for rain."], ["Write the meanings of: parched, drenched, shimmer.", "• parched – very dry and hot.\n• drenched – completely wet.\n• shimmer – shine with soft moving light."]];
+const HOTS=[["तर्क", "Why does the poet call the fields ‘hungry’ and the rivers ‘thirsty’?", "• Human feelings given to fields/rivers.\n• Land needs water as we need food and water."], ["विचार", "What will happen if it does not rain for a whole year?", "• Drought; crops fail.\n• Scarcity of water for people and animals."], ["विचार", "What will happen if it rains continuously for ten days?", "• Floods; houses, roads damaged.\n• Crops rot; schools closed."], ["तुलना", "Compare the first stanza and the last stanza of the poem.", "• First: hot, dry, parched.\n• Last: wet, green, cheery."], ["सर्जन", "Write four lines of your own about the rainy season.", "• Use words: cloud, drop, green, happy.\n• Try to make last words rhyme."], ["विश्लेषण", "Which words in the poem tell you that rain is coming near?", "• Dark clouds, thunder, lightning.\n• Peacocks sway, lark sings."], ["तर्क", "Why do you think the poet uses ‘Pit, pat!’ in the poem?", "• Imitates sound of raindrops.\n• Makes the poem lively; you can ‘hear’ the rain."], ["उपयोजन", "Write five sentences on how you enjoy the first rain in your village.", "• Smell of earth, playing in water, paper boats.\n• Use simple present tense."], ["उपयोजन", "Suggest three ways to save rainwater in your school.", "• Rainwater harvesting, storage tanks.\n• Pits near trees; don’t waste tap water."], ["सर्जन", "Write a short dialogue between a farmer and his child on the first rainy day.", "• Greetings, feelings, plans for sowing.\n• 4–6 lines are enough."], ["मूल्यमापन", "‘Rain is more of a friend than an enemy.’ Do you agree? Why?", "• Gives water, crops, greenery.\n• But too much rain brings floods."], ["विश्लेषण", "Find the describing words (adjectives) used in the poem.", "• dark (clouds), happy, green, cheery (Earth)."]];
+const SWB=[{"h": "c. कवितेतील योग्य शब्द वापरून रिकाम्या जागा भरा.", "t": "qa", "lines": 1, "items": [["The land has ________.", "dried"], ["The rivers are ________.", "thirsty"], ["The clouds are ________.", "dark"], ["Feathers spread, the peacocks ________.", "sway"], ["Bolts of lightning, streak and ________.", "shimmer"]]}, {"h": "d. तुमच्या अंदाजाने वाक्ये पूर्ण करा.", "t": "qa", "lines": 2, "items": [["If it does not rain, then ________.", "the land will become dry, crops will not grow and there will be a shortage of water (drought)."], ["If it rains continuously, then ________.", "there will be a flood; roads and houses will be damaged."]]}, {"h": "e. कवितेतील खालील शब्दांशी यमक जुळणारे शब्द शोधा.", "t": "match", "L": ["bark", "wonder", "merry", "yard"], "R": ["hard", "cheery", "lark", "thunder"], "A": [2, 3, 1, 0]}, {"h": "f. कविता वाचून तक्ता पूर्ण करा. (flash, happy, roar, completely wet, sprayed)", "t": "match", "L": ["thunder", "hosed", "bolt", "bright and cheerful", "drenched"], "R": ["flash", "happy", "roar", "completely wet", "sprayed"], "A": [2, 4, 0, 1, 3]}, {"h": "g. येथे कोणता ऋतू सांगितला आहे? “The land has dried, it’s so parched. The fields are hungry, rivers thirsty.”", "t": "mcq", "items": [["Which season is mentioned here?", ["Winter", "Summer", "Spring", "Autumn"], 1]]}, {"h": "h. वाचा, विचार करा व पूर्ण करा.", "t": "table", "head": ["", "Condition before rain", "Condition after rain"], "rows": [["sky", {"a": "bright, sunny and hot"}, {"a": "dark clouds, thunder and lightning"}], ["land", {"a": "dried and parched"}, {"a": "drenched and soaked"}], ["earth", {"a": "dry and dusty"}, {"a": "happy, green and cheery"}]]}, {"h": "i. ‘Repetition’ ची इतर उदाहरणे कवितेतून शोधा.", "t": "qa", "lines": 1, "items": [["Find examples of ‘Repetition’.", "Rain, rain is on her way / Oh rain, rain come our way / Oh rain, rain come again."]]}, {"h": "कृती / उपक्रम", "t": "text", "items": ["पावसावरील इतर कविता गोळा करून वर्गात ठराविक लयीत सादर करा.", "‘Repetition’ ची इतर कवितांतील उदाहरणे शोधा."]}];
+
+const L={name:'पाठ 1 : Monsoon',cls:'इयत्ता : 6वी &nbsp; विषय : इंग्रजी',foot:'इ. 6वी इंग्रजी · पाठ 1'};
+const SYM=[];const symGrid2=()=>'';
+const EN=(t,r)=>{try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='en-IN';u.rate=r||.8;const vs=speechSynthesis.getVoices();const v=vs.find(x=>/en[-_]IN/i.test(x.lang))||vs.find(x=>/^en/i.test(x.lang));if(v)u.voice=v;speechSynthesis.speak(u)}catch(e){}};
+const enb=(t,lab)=>`<button class="say" style="float:none;margin:0 4px" onclick="EN(this.dataset.t)" data-t="${esc(t).replace(/"/g,'&quot;')}">🔊${lab?' '+lab:''}</button>`;
+const D={sun:'सूर्य',shining:'चमकत आहे',hard:'तीव्र, कडक',land:'जमीन',dried:'सुकली',parched:'कोरडीठाक',fields:'शेते',hungry:'भुकेली',rivers:'नद्या',thirsty:'तहानलेल्या',rain:'पाऊस',way:'वाट, मार्ग',feathers:'पिसे',spread:'पसरली',peacocks:'मोर',sway:'डोलतात',clouds:'ढग',dark:'काळे',hark:'ऐका!',lark:'चंडोल पक्षी',gather:'जमतात',dash:'धडकतात',thunder:'गडगडाट',bolts:'विजेचे लोळ',lightning:'वीज',streak:'झळाळी / रेषा',shimmer:'मंद चमचमणे',drop:'थेंब',feel:'जाणवतो',drenched:'चिंब भिजलेली',soaked:'भिजलेली',trees:'झाडे',bathed:'न्हाली',hosed:'जोरात वाहिल्या',earth:'पृथ्वी',happy:'आनंदी',green:'हिरवी',cheery:'उल्हसित',again:'पुन्हा',come:'ये',oh:'अरे! (उद्गार)','pit':'टप','pat':'टप'};
+const POEM=[["The Sun is shining, oh so hard,","The land has dried, it’s so parched.","The fields are hungry, rivers thirsty,","Oh rain, rain come our way."],["Rain, rain is on her way,","Feathers spread, the peacocks sway.","The clouds are dark, hark the lark,","Rain, rain she’s on her way."],["The clouds they gather, dash and thunder,","Bolts of lightning, streak and shimmer.","Pit, pat! I feel a drop,","Oh rain, rain she’s come her way."],["The fields are drenched, the land is soaked,","The trees have bathed, the rivers hosed.","The Earth is happy, green and cheery,","Oh rain, rain come again."]];
+const BHAV=['कडक ऊन आहे. जमीन कोरडी झाली आहे. शेते भुकेली व नद्या तहानलेल्या आहेत. हे पावसा, आमच्याकडे ये!','पाऊस येत आहे. मोर पिसारा फुलवून डोलत आहेत. ढग काळे झाले आहेत, चंडोल पक्षी गात आहे.','ढग जमतात, गडगडतात. विजा चमकतात. टप् टप्! थेंब पडू लागला. पाऊस आला!','शेते चिंब भिजली, जमीन ओली झाली. झाडे न्हाली, नद्या जोरात वाहू लागल्या. पृथ्वी आनंदी, हिरवीगार झाली. पावसा, पुन्हा ये!'];
+const pw=l=>l.replace(/[A-Za-z]+/g,m=>{const k=m.toLowerCase();return `<span class="pw${D[k]?' pm':''}" data-k="${k}" onclick="pwc(this)">${m}</span>`});
+function pwc(e){const k=e.dataset.k;EN(k,.7);$('wm').innerHTML=`🔊 <b>${k}</b> — ${D[k]||'सोपा शब्द'}`}
+function poemAll(){EN(POEM.flat().join(' '),.75)}
+function spell(w,mr){const id='sp'+(++WID);const R=rng(3+WID);const t=shuf(w.split('').map((c,i)=>[c,i]),R);return `<div class="mini" id="${id}" data-w="${w}" data-a=""><b>🔤 ${enb(w)} ऐका व अक्षरे टॅप करून स्पेलिंग बनवा</b> <small>(${mr})</small><div id="${id}o" style="font-size:26px;font-weight:800;letter-spacing:5px;min-height:42px;border-bottom:3px dashed #fb923c;margin:8px 0"></div><div style="display:flex;gap:6px;flex-wrap:wrap">${t.map(([c,i])=>`<button class="chip" onclick="spt('${id}',this)">${c}</button>`).join('')}</div><button class="btn ln" onclick="spr('${id}')">↺ पुन्हा</button><div class="mm"></div></div>`}
+function spt(id,b){const box=$(id);if(box.dataset.done||b.disabled)return;b.disabled=true;b.style.opacity=.3;box.dataset.a+=b.textContent;$(id+'o').textContent=box.dataset.a;if(box.dataset.a.length==box.dataset.w.length){const ok=box.dataset.a==box.dataset.w;box.querySelector('.mm').innerHTML=ok?'<div class="msg ok">🎉 स्पेलिंग बरोबर!</div>':'<div class="msg no">✘ चुकले. ↺ दाबून पुन्हा प्रयत्न करा.</div>';if(ok){box.dataset.done=1;LS.pts++;updProg();EN(box.dataset.w)}}}
+function spr(id){const box=$(id);if(box.dataset.done)return;box.dataset.a='';$(id+'o').textContent='';box.querySelectorAll('.chip').forEach(b=>{b.disabled=false;b.style.opacity=1});box.querySelector('.mm').innerHTML=''}
+function lq(w,right,wr){const o=[right].concat(wr);const R=rng(5+WID);const sh=shuf(o.map((x,i)=>[x,i]),R);const id='lq'+(++WID);return `<div class="mini" id="${id}"><b>🎧 ${enb(w,'ऐका')} शब्द ऐका, मराठी अर्थ निवडा</b>${sh.map(([x,i])=>`<button class="opt" onclick="mqa('${id}',this,${i==0},'${w} = ${esc(right).replace(/'/g,"\\'")}')">${x}</button>`).join('')}<div class="mm"></div></div>`}
+function pron(id,w){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;const mm=$(id).querySelector('.mm');if(!SR){mm.innerHTML='<div class="msg in">या ठिकाणी बोलण्याची तपासणी चालत नाही. Chrome मध्ये थेट वेबसाइट उघडा.</div>';return}try{const r=new SR();r.lang='en-IN';r.onresult=e=>{const t=e.results[0][0].transcript.toLowerCase();const ok=t.indexOf(w)>=0;mm.innerHTML=`<div class="msg ${ok?'ok':'no'}">तुम्ही म्हणालात : “${esc(t)}” — ${ok?'🎉 छान!':'पुन्हा ऐका व म्हणा.'}</div>`;if(ok){LS.pts++;updProg()}};r.onerror=()=>{mm.innerHTML='<div class="msg in">माइकची परवानगी द्या व पुन्हा प्रयत्न करा.</div>'};r.start();mm.innerHTML='<div class="msg in">🎤 आता बोला…</div>'}catch(e){mm.innerHTML='<div class="msg in">माइक सुरू झाला नाही.</div>'}}
+function pr(w,mr){const id='pr'+(++WID);return `<div class="mini" id="${id}"><b>${enb(w)} ${w}</b> <small>(${mr})</small> <button class="btn gr" style="margin:0 0 0 6px" onclick="pron('${id}','${w}')">🎤 मी म्हणतो</button><div class="mm"></div></div>`}
+const WB=[['parched','very dry and hot','कोरडीठाक'],['streak','flash of light','प्रकाशाचा झोत'],['shimmer','shine with the soft light that seems to be moving','मंद चमचमणे'],['pit-pat','sound of tapping raindrops','टपटप आवाज'],['drenched','completely wet','चिंब भिजलेले'],['hosed','the rivers flew strongly as if spraying water','जोरात वाहिल्या']];
+const SECS=[
+{t:'ऐका, म्हणा व शब्द टॅप करा',say:'चला कविता ऐकूया. कोणत्याही शब्दावर बोट ठेवा, त्याचा मराठी अर्थ दिसेल.',
+ h:()=>`<style>.pw{cursor:pointer}.pm{border-bottom:2px dotted #ea580c;color:#9a3412;font-weight:700}.pl{font-size:18px;line-height:1.9;margin:2px 0}.st{background:#fff7ed;border-radius:14px;padding:10px 12px;margin:10px 0}</style>
+ <div class="key">🎧 <b>कसे वापरावे?</b> ▶ दाबून कविता ऐका. नारिंगी रेघ असलेल्या शब्दावर टिचकी मारा – मराठी अर्थ + उच्चार!</div>
+ <button class="btn bl" onclick="poemAll()">▶ संपूर्ण कविता ऐका</button>
+ <div id="wm" class="msg in" style="position:sticky;top:4px;z-index:5;min-height:24px">👆 एखाद्या शब्दावर टिचकी मारा</div>
+ ${POEM.map((s,i)=>`<div class="st"><b>कडवे ${i+1}</b> ${enb(s.join(' '),'ऐका')}${s.map(l=>`<div class="pl">${pw(l)}</div>`).join('')}<details><summary>📖 मराठी भावार्थ</summary><p>${BHAV[i]}</p></details></div>`).join('')}
+ <p style="text-align:right"><i>– Anonymous</i></p>`},
+{t:'Word Basket – शब्द-पेटी',say:'शब्द-पेटीतील सहा शब्द शिका. कार्डवर टिचकी मारा.',
+ h:()=>`<div class="key">कार्डवर टिचकी मारा – अर्थ दिसेल. 🔊 दाबून उच्चार ऐका.</div><div class="sg">${WB.map(w=>`<div class="sc" onclick="this.classList.toggle('on');EN('${w[0]}')"><div class="sy" style="font-size:20px">${w[0]}</div><div class="sf">👆 अर्थ पाहा</div><div class="sb"><b>${w[2]}</b><br><small>${w[1]}</small></div></div>`).join('')}</div>
+ <h3>🎧 ऐका आणि निवडा</h3>${lq('parched','कोरडीठाक',['चिंब भिजलेले','आनंदी'])}${lq('drenched','चिंब भिजलेले',['कोरडीठाक','गडगडाट'])}${lq('thunder','गडगडाट',['वीज','थेंब'])}${lq('lightning','वीज',['गडगडाट','ढग'])}${lq('thirsty','तहानलेले',['भुकेले','आनंदी'])}${lq('cheery','आनंदी, उल्हसित',['कोरडीठाक','भिजलेले'])}`},
+{t:'स्पेलिंग तयार करा',say:'शब्द ऐका आणि अक्षरे योग्य क्रमाने टॅप करून स्पेलिंग बनवा.',
+ h:()=>spell('rain','पाऊस')+spell('cloud','ढग')+spell('thunder','गडगडाट')+spell('shimmer','चमचमणे')+spell('peacock','मोर')+spell('drenched','चिंब')},
+{t:'कविता पूर्ण करा',say:'योग्य शब्द निवडून कवितेच्या ओळी पूर्ण करा.',
+ h:()=>cloze('कवितेतील रिकाम्या जागा','1. The land has ___.<br>2. The rivers are ___.<br>3. The clouds are ___.<br>4. Feathers spread, the peacocks ___.<br>5. Bolts of lightning, streak and ___.',['dried','thirsty','dark','sway','shimmer'],['dried','thirsty','dark','sway','shimmer','soaked','cheery'])+
+ ordGame('कडवे 4 च्या ओळी योग्य क्रमाने लावा',POEM[3])+ordGame('कडवे 3 च्या ओळी योग्य क्रमाने लावा',POEM[2])},
+{t:'यमक व अर्थ जुळवा',say:'यमक जुळणारे शब्द आणि समान अर्थाचे शब्द जुळवा.',
+ h:()=>`<div class="key">🎵 <b>यमक (Rhyme)</b> = शेवटचा आवाज सारखा. उदा. <i>bark – lark</i></div>`+matchSel('यमक जुळवा',[['bark','lark'],['wonder','thunder'],['merry','cheery'],['yard','hard']],['hard','cheery','lark','thunder'])+matchSel('शब्द व अर्थ जुळवा',[['thunder','roar'],['hosed','sprayed'],['bolt','flash'],['bright and cheerful','happy'],['drenched','completely wet']],['flash','happy','roar','completely wet','sprayed'])},
+{t:'पावसापूर्वी की पावसानंतर?',say:'प्रत्येक वाक्य पावसापूर्वीचे आहे की पावसानंतरचे ते ठरवा.',
+ h:()=>sortGame('वाक्य कधीचे आहे?',[['The land has dried.',0],['The fields are hungry.',0],['The rivers are thirsty.',0],['The fields are drenched.',1],['The trees have bathed.',1],['The Earth is happy, green and cheery.',1]],['पावसापूर्वी','पावसानंतर'])+mini('Which season is mentioned in “The land has dried, it’s so parched”?',['Winter','Summer','Spring'],1,'Summer = उन्हाळा.')},
+{t:'Repetition – पुनरावृत्ती',say:'कवितेत एकच शब्द पुन्हा पुन्हा आला आहे. त्याला पुनरावृत्ती म्हणतात.',
+ h:()=>`<div class="key"><b>Repetition</b> = एखादा शब्द, वाक्यांश किंवा ओळ पुन्हा पुन्हा येणे.<br>उदा. <i>‘Fly, fly little bird.’</i></div><p>कवितेत पाहा : <b>Rain, rain</b> is on her way ${enb('Rain, rain is on her way')}</p>`+mini('Which line has repetition?',['The Sun is shining','Oh rain, rain come our way','The trees have bathed'],1,'rain, rain – शब्द दोनदा.')+mini('Which one is also repetition?',['Run, run, run away!','The sky is blue','She is happy'],0,'run, run, run – पुन्हा पुन्हा.')+mini('‘Oh rain, rain come again’ – figure of speech?',['Repetition','Simile','Metaphor'],0,'rain शब्दाची पुनरावृत्ती.')},
+{t:'तुमची पाळी – बोला',say:'आता तुम्ही शब्द मोठ्याने म्हणा. प्रथम ऐका, मग म्हणा.',
+ h:()=>`<div class="key">🔊 आधी ऐका, मग 🎤 दाबून शब्द म्हणा. (माइक फक्त Chrome मध्ये थेट वेबसाइटवर चालतो; इतरत्र शब्द ऐकून स्वतः म्हणा.)</div>${pr('rain','पाऊस')}${pr('thunder','गडगडाट')}${pr('lightning','वीज')}${pr('peacock','मोर')}${pr('parched','कोरडीठाक')}<div class="key" id="fin"></div>`}
+];
+function chkMt(){}
+
+</script>
+<script>
+/* ---------- helpers ---------- */
+const $=id=>document.getElementById(id);
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function shuf(a,R){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(R()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function say(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='mr-IN';u.rate=.9;const v=speechSynthesis.getVoices().find(x=>/mr/i.test(x.lang))||speechSynthesis.getVoices().find(x=>/hi/i.test(x.lang));if(v)u.voice=v;speechSynthesis.speak(u)}catch(e){}}
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const sx=t=>`<button class="say" onclick="say(this.dataset.t)" data-t="${esc(t).replace(/"/g,'&quot;')}">🗣 ऐका</button>`;
+const LET=['अ','ब','क','ड','इ'];
+let view='home';
+function go(v){view=v;try{history.replaceState(null,'','#'+v)}catch(e){}draw();window.scrollTo({top:0})}
+function draw(){const m=$('main');({home:vHome,learn:vLearn,mcq:vMcq,sw:vSw,hots:vHots}[view]||vHome)(m)}
+
+/* ---------- home ---------- */
+function vHome(m){m.innerHTML=`<div class="grid">
+<button class="hc" onclick="go('learn')"><div class="ic">📖</div><h2>1. शिकू या</h2><p>पायरी-पायरीने पाठ समजून घ्या – कृतीसह, स्वतः तपासा</p></button>
+<button class="hc" onclick="go('mcq')"><div class="ic">❓</div><h2>2. MCQ प्रश्न</h2><p>बहुपर्यायी सराव + A4 PDF (उत्तरसूचीसह)</p></button>
+<button class="hc" onclick="go('sw')"><div class="ic">✍️</div><h2>3. स्वाध्याय</h2><p>अ) पुस्तकातील · ब) अधिक (पुस्तकाबाहेरील) – PDF</p></button>
+<button class="hc" onclick="go('hots')"><div class="ic">🧠</div><h2>4. उपयोजनात्मक / HOTS</h2><p>विचार करायला लावणारे प्रश्न – PDF</p></button></div>`}
+
+/* ---------- widgets ---------- */
+const symGrid=()=>`<div class="sg">${SYM.map(s=>`<div class="sc" onclick="this.classList.toggle('on')"><div class="sy">${s[0]}</div><div class="sf">❓ कोणता धर्म?<br><small>(टिचकी मारा)</small></div><div class="sb"><b>${s[1]}</b><br><small>${s[2]}</small></div></div>`).join('')}</div>`;
+const phGrid=(ks)=>`<div class="sg">${ks.map(k=>`<div class="sc" onclick="this.classList.toggle('on')"><img src="${IM[k[0]]}" style="width:100%;border-radius:8px"><div class="sf" style="font-size:13px">❓ हे काय आहे?</div><div class="sb"><b>${k[1]}</b></div></div>`).join('')}</div>`;
+const qimg=k=>`<img src="${IM[k]}" style="width:100%;max-width:300px;border-radius:10px;display:block;margin:6px 0">`;
+let WID=0;
+function chipsInfo(items){const id='ci'+(++WID);return `<div class="chips" id="${id}c">${items.map((x,i)=>`<button class="chip" onclick="ci('${id}',${i})">${x[0]}</button>`).join('')}</div><div class="info" id="${id}">👆 एखाद्या शब्दावर टिचकी मारा.</div>`+`<script type="text/plain" id="${id}d">${esc(JSON.stringify(items.map(x=>x[1])))}<\/script>`}
+function ci(id,i){const d=JSON.parse($(id+'d').textContent.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&'));$(id).innerHTML=d[i];[...$(id+'c').children].forEach((c,j)=>c.classList.toggle('on',i==j))}
+const flip=(q,a)=>`<div class="flip" onclick="this.classList.toggle('on')"><div class="fq">❓ ${q}</div><div class="fa">✔ ${a}</div></div>`;
+function mini(q,opts,ans,why){const id='mq'+(++WID);return `<div class="mini" id="${id}"><b>🧩 स्वतः तपासा:</b> ${q}${opts.map((o,i)=>`<button class="opt" onclick="mqa('${id}',this,${i==ans},'${esc(why).replace(/'/g,"\\'")}')">${o}</button>`).join('')}<div class="mm"></div></div>`}
+function mqa(id,b,ok,why){const box=$(id);if(box.dataset.done)return;b.classList.add(ok?'ok':'no');const mm=box.querySelector('.mm');
+ if(ok){box.dataset.done=1;mm.innerHTML=`<div class="msg ok">🎉 बरोबर! ${why}</div>`;LS.pts++;updProg()}else mm.innerHTML='<div class="msg no">✘ पुन्हा प्रयत्न करा.</div>'}
+function ordGame(title,items){const id='og'+(++WID);const R=rng(7+WID);const sh=shuf(items.map((x,i)=>[x,i]),R);
+ return `<div class="mini" id="${id}" data-n="${items.length}" data-k="0"><b>🔢 ${title}</b><div class="ord">${sh.map(([x,i])=>`<button class="opt" data-i="${i}" onclick="ogc('${id}',this)">${x}</button>`).join('')}</div><div class="mm">क्रमाने एकेक घटना निवडा.</div></div>`}
+function ogc(id,b){const box=$(id);let k=+box.dataset.k;if(b.classList.contains('ok'))return;const mm=box.querySelector('.mm');
+ if(+b.dataset.i===k){b.classList.add('ok');b.innerHTML=(k+1)+'. '+b.innerHTML;box.dataset.k=++k;mm.innerHTML=k==box.dataset.n?'<div class="msg ok">🎉 सर्व क्रम बरोबर!</div>':'<div class="msg in">बरोबर! पुढची घटना कोणती?</div>';if(k==box.dataset.n){LS.pts++;updProg()}}
+ else mm.innerHTML='<div class="msg no">✘ ही घटना आता नाही. विचार करून पुन्हा निवडा.</div>'}
+
+
+function sortGame(title,items,cats){const id='sg'+(++WID);return `<div class="mini" id="${id}" data-n="${items.length}" data-k="0"><b>🗂 ${title}</b>${items.map((x,i)=>`<div class="qcard" id="${id}_${i}"><div>${x[0]}</div><div class="chips">${cats.map((c,j)=>`<button class="chip" onclick="sgc('${id}',${i},${j},${x[1]})">${c}</button>`).join('')}</div></div>`).join('')}<div class="mm"></div></div>`}
+function sgc(id,i,j,right){const r=$(id+'_'+i);if(r.dataset.d)return;const box=$(id);if(j==right){r.dataset.d=1;r.style.background='#dcfce7';r.querySelectorAll('.chip').forEach((c,k)=>{c.disabled=true;c.classList.toggle('on',k==j)});box.dataset.k=+box.dataset.k+1;LS.pts++;updProg();if(box.dataset.k==box.dataset.n)box.querySelector('.mm').innerHTML='<div class="msg ok">🎉 सर्व बरोबर!</div>'}else{r.style.background='#fee2e2';setTimeout(()=>{if(!r.dataset.d)r.style.background=''},700)}}
+function matchSel(title,rows,opts){const id='ms'+(++WID);return `<div class="mini" id="${id}"><b>🧩 ${title}</b><table class="t">${rows.map((r,i)=>`<tr><td style="text-align:left">${r[0]}</td><td><select id="${id}_${i}"><option value="">–</option>${opts.map(o=>`<option>${o}</option>`).join('')}</select></td></tr>`).join('')}</table><button class="btn gr" onclick="msc('${id}',${esc(JSON.stringify(rows.map(r=>r[1]))).replace(/"/g,'&quot;')})">तपासा</button><div class="mm"></div></div>`}
+function msc(id,ans){let ok=0;ans.forEach((a,i)=>{const s=$(id+'_'+i),g=s.value==a;if(g)ok++;s.style.background=s.value?(g?'#dcfce7':'#fee2e2'):''});$(id).querySelector('.mm').innerHTML=ok==ans.length?'<div class="msg ok">🎉 सर्व बरोबर!</div>':`<div class="msg in">${ok}/${ans.length} बरोबर. लाल रंगाची उत्तरे बदला.</div>`;if(ok==ans.length){LS.pts++;updProg()}}
+
+/* ---------- नागरिकशास्त्र विशेष widgets ---------- */
+function scen(title,sit,opts){const id='sc'+(++WID);return `<div class="mini" id="${id}"><b>🎭 ${title}</b><div class="key" style="margin:6px 0">${sit}</div>${opts.map((o,i)=>`<button class="opt" onclick="scc('${id}',this,${o[1]},'${esc(o[2]).replace(/'/g,"\\'")}')">${o[0]}</button>`).join('')}<div class="mm">तुम्ही काय कराल? एक पर्याय निवडा.</div></div>`}
+function scc(id,b,good,why){const box=$(id);if(box.dataset.done)return;b.classList.add(good?'ok':'no');const mm=box.querySelector('.mm');mm.innerHTML=`<div class="msg ${good?'ok':'no'}">${good?'🎉 योग्य निर्णय!':'⚠ विचार करा.'} ${why}</div>`;if(good){box.dataset.done=1;LS.pts++;updProg()}}
+function cloze(title,text,ans,bank){const id='cz'+(++WID);let k=0;const h=text.replace(/___/g,()=>{const i=k++;return `<select id="${id}_${i}" style="font:inherit;padding:2px;border-radius:6px"><option value="">____</option>${bank.map(o=>`<option>${o}</option>`).join('')}</select>`});
+ return `<div class="mini" id="${id}"><b>✍ ${title}</b><div style="line-height:2.1;margin:8px 0">${h}</div><button class="btn gr" onclick="czc('${id}',${esc(JSON.stringify(ans)).replace(/"/g,'&quot;')})">तपासा</button><div class="mm"></div></div>`}
+function czc(id,ans){let ok=0;ans.forEach((a,i)=>{const s=$(id+'_'+i),g=s.value==a;if(g)ok++;s.style.background=s.value?(g?'#dcfce7':'#fee2e2'):''});$(id).querySelector('.mm').innerHTML=ok==ans.length?'<div class="msg ok">🎉 सर्व बरोबर!</div>':`<div class="msg in">${ok}/${ans.length} बरोबर. लाल रंगाची रिकामी जागा पुन्हा भरा.</div>`;if(ok==ans.length){LS.pts++;updProg()}}
+function tree(title,nodes){const r=(n)=>`<details style="margin:4px 0 4px 10px"><summary style="cursor:pointer;font-weight:700;color:#7c2d12">${n[0]}</summary><div style="margin:4px 0 4px 8px;font-size:15px">${n[1]||''}</div>${(n[2]||[]).map(r).join('')}</details>`;return `<div class="mini"><b>🌳 ${title}</b><div style="margin-top:6px">${nodes.map(r).join('')}</div><div class="mm" style="font-size:13px;color:#78716c">▶ टिचकी मारून उघडा.</div></div>`}
+function voteSim(title,cands,rule){const id='vt'+(++WID);const R=rng(11+WID);const base=cands.map(()=>3+Math.floor(R()*8));return `<div class="mini" id="${id}" data-base='${JSON.stringify(base)}'><b>🗳 ${title}</b><div class="key" style="margin:6px 0">${rule}</div>${cands.map((c,i)=>`<button class="opt" onclick="vtc('${id}',${i})">${c}</button>`).join('')}<div class="mm">गुप्त मतदान – तुमचे मत नोंदवा.</div></div>`}
+function vtc(id,i){const box=$(id);if(box.dataset.done)return;box.dataset.done=1;const base=JSON.parse(box.dataset.base);base[i]++;const names=[...box.querySelectorAll('.opt')].map(b=>b.textContent);const tot=base.reduce((a,b)=>a+b,0);const mx=Math.max(...base);const w=base.indexOf(mx);
+ box.querySelector('.mm').innerHTML=`<div class="msg ok">तुमचे मत नोंदले. निकाल (एकूण ${tot} मते):</div>`+base.map((v,j)=>`<div style="margin:4px 0">${names[j]} — ${v} मते<div style="background:#fde68a;height:10px;border-radius:5px;width:${Math.round(v/mx*100)}%"></div></div>`).join('')+`<div class="msg in">🏆 बहुमत : <b>${names[w]}</b> विजयी. (लोकशाहीत बहुमताने निर्णय होतो.)</div>`;LS.pts++;updProg()}
+/* ---------- 1. शिकू या ---------- */
+let LS={s:0,pts:0};
+function updProg(){const p=$('pb');if(p)p.style.width=Math.round((LS.s+1)/SECS.length*100)+'%';const s=$('pts');if(s)s.textContent='⭐ '+LS.pts}
+function vLearn(m){const S=SECS[LS.s];
+ if(S.bare){m.innerHTML=`<button class="back" onclick="go('home')">← मुख्य पान</button><div class="card" style="padding:0;overflow:hidden">${S.h()}</div>`;return}
+ m.innerHTML=`<button class="back" onclick="go('home')">← मुख्य पान</button>
+ <div class="card"><div style="display:flex;justify-content:space-between"><span style="font-weight:700;color:var(--mut)">पायरी ${LS.s+1} / ${SECS.length}</span><span id="pts" style="font-weight:700">⭐ ${LS.pts}</span></div><div class="prog"><i id="pb" style="width:${Math.round((LS.s+1)/SECS.length*100)}%"></i></div>
+ ${sx(S.say)}<h2>${S.t}</h2>${S.h()}
+ <div class="nav"><button class="btn ln" ${LS.s==0?'disabled':''} onclick="LS.s--;draw();window.scrollTo({top:0})">◀ मागे</button><button class="btn" ${LS.s==SECS.length-1?'disabled':''} onclick="LS.s++;draw();window.scrollTo({top:0})">पुढे ▶</button></div></div>`;
+ if(LS.s==SECS.length-1)$('fin').innerHTML='🏆 पाठ पूर्ण! आता ‘MCQ’ आणि ‘स्वाध्याय’ सोडवा.'}
+
+/* ---------- print machinery ---------- */
+function wrapDoc(inner,forPrint){return `<div class="doc"><table class="pg"><thead><tr><td><div class="sph"></div></td></tr></thead><tbody><tr><td>${inner}</td></tr></tbody><tfoot><tr><td><div class="spf"></div></td></tr></tfoot></table></div>`}
+const WMK='<div class="wmk"><div>जी.एम.नदाफ केंद्रप्रमुख गिरगांव ता.जत</div><div>7972568986</div></div>';
+const PFOOT=`<div class="pfoot"><span>रचनाकार : जी.एम.नदाफ, केंद्रप्रमुख गिरगांव ता.जत · 📞 7972568986</span><span>${L.foot}</span></div>`;
+function togPdf(){const p=$('pdfp');if(!p)return;const s=p.style.display=='none';p.style.display=s?'block':'none';if(s)p.scrollIntoView({behavior:'smooth'})}
+function doPrint(html){$('printHost').innerHTML=WMK+PFOOT+wrapDoc(html);window.print()}
+window.addEventListener('afterprint',()=>{$('printHost').innerHTML=''});
+function dHead(t,marks,sch){return `<div class="dh"><div class="r"><b>${sch?esc(sch):'शाळा: ________________________'}</b><span>${L.cls}</span></div><div class="r"><span>नाव : <i class="ln" style="min-width:55mm"></i></span><span>दिनांक : <i class="ln" style="min-width:26mm"></i></span><span>गुण : &nbsp;&nbsp;&nbsp;&nbsp;/ ${marks}</span></div></div><h3 class="dt">${t}</h3><div class="ds">${L.name}</div>`}
+const wl=n=>'<div class="wl"></div>'.repeat(n);
+let CURDOC='';
+function showPrev(html){CURDOC=html;$('prev').innerHTML=wrapDoc(html)}
+function toolbar(opts){return `<div class="card"><div class="tool">${opts}</div></div>`}
+const seedBox=(v)=>`<label>संच क्र.</label><input type="number" id="seed" min="1" max="99999" value="${v}" style="width:90px" onchange="regen()"><button class="btn gr" onclick="$('seed').value=1+Math.floor(Math.random()*99999);regen()">🎲 नवा संच</button>`;
+const schoolBox=`<label>शाळा:</label><input type="text" id="sch" placeholder="(ऐच्छिक)" style="width:170px" oninput="regen()">`;
+const keyBox=`<label><input type="checkbox" id="ky" checked onchange="regen()"> उत्तरसूची जोडा</label>`;
+const prBtn=`<button class="btn bl" onclick="doPrint(CURDOC)">📄 PDF / प्रिंट</button>`;
+const prHelp=`<div class="msg in">प्रिंट विंडोमध्ये ‘Save as PDF’ निवडा, कागद A4, Margins ‘None’ ठेवा. प्रत्येक वेळी नवा संच क्र. = नवे प्रश्न; तोच क्रमांक = तोच संच.</div>`;
+let REGEN=()=>{};function regen(){REGEN()}
+
+/* ---------- 2. MCQ ---------- */
+let MC={qs:[],i:0,sc:0,wrong:[],done:false};
+function mcStart(){const R=rng(Date.now()%100000);MC={qs:shuf(MCQ,R).slice(0,10).map(q=>mkq(q,R)),i:0,sc:0,wrong:[],done:false};drawMc()}
+function mkq(q,R){const o=shuf([[q[1],1],[q[2],0],[q[3],0],[q[4],0]],R);return{q:q[0],o:o.map(x=>x[0]),a:o.findIndex(x=>x[1]),e:q[5]}}
+function vMcq(m){m.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px"><button class="back" style="margin:0" onclick="go('home')">← मुख्य पान</button><button class="btn bl" style="margin:0" onclick="togPdf()">📄 PDF तयार करा</button></div><div class="card" id="mcb"></div>
+ <div class="card" id="pdfp" style="display:none"><h2>🖨 MCQ चाचणी (A4 PDF)</h2><div class="tool"><label>प्रश्न:</label><select id="mn" onchange="regen()"><option>10</option><option selected>15</option><option>20</option><option>25</option></select>${seedBox(301)}${schoolBox}${keyBox}${prBtn}</div>${prHelp}<div class="paper" id="prev"></div></div>`;
+ REGEN=genMcq;mcStart();genMcq()}
+function drawMc(){const b=$('mcb');if(!b)return;
+ if(MC.done){b.innerHTML=`<h2>📊 निकाल : ${MC.sc} / ${MC.qs.length}</h2><div class="msg ${MC.sc>=8?'ok':'in'}">${MC.sc>=9?'उत्तम! 🏆':MC.sc>=7?'छान! 👍':'पुन्हा सराव करा 💪'}</div>${MC.wrong.length?'<h3>चुकलेले प्रश्न:</h3>'+MC.wrong.map(w=>`<div class="qcard"><b>${w.q}</b><div class="ans show">✔ ${w.o[w.a]}\n${w.e}</div></div>`).join(''):''}<button class="btn gr" onclick="mcStart()">🔄 नवे 10 प्रश्न</button>`;return}
+ const q=MC.qs[MC.i];b.innerHTML=`<h2>❓ सराव (${MC.i+1}/${MC.qs.length}) <small style="float:right">⭐ ${MC.sc}</small></h2><div class="prog"><i style="width:${MC.i/MC.qs.length*100}%"></i></div><p><b>${q.q}</b></p>${q.o.map((o,i)=>`<button class="opt" onclick="mcA(${i},this)">${LET[i]}) ${o}</button>`).join('')}<div id="mcm"></div>`}
+function mcA(i,b){const q=MC.qs[MC.i];if(q.d)return;q.d=1;const bs=document.querySelectorAll('#mcb .opt');bs[q.a].classList.add('ok');if(i!=q.a)b.classList.add('no');if(i==q.a)MC.sc++;else MC.wrong.push(q);
+ $('mcm').innerHTML=`<div class="msg ${i==q.a?'ok':'no'}">${i==q.a?'🎉 बरोबर!':'✘ चुकले.'} ${q.e}</div><button class="btn" onclick="MC.i++;if(MC.i>=MC.qs.length)MC.done=true;drawMc()">${MC.i==MC.qs.length-1?'निकाल पाहा':'पुढचा प्रश्न ▶'}</button>`}
+function genMcq(){const n=+$('mn').value,seed=+$('seed').value||1,R=rng(seed);const qs=shuf(MCQ,R).slice(0,n).map(q=>mkq(q,R));
+ let h=dHead('MCQ चाचणी',n,$('sch').value.trim())+`<div class="ds">संच क्र. ${seed} · योग्य पर्याय निवडून उत्तर कंसात लिहा.</div>`+
+ qs.map((q,i)=>`<div class="qb"><div>${i+1}. ${q.q} <b>( &nbsp;&nbsp;&nbsp; )</b></div><div class="opts">${q.o.map((o,j)=>`<span>${LET[j]}) ${o}</span>`).join('')}</div></div>`).join('');
+ if($('ky').checked)h+=`<div class="qb key"><b>उत्तरसूची (शिक्षकांसाठी) – संच ${seed}</b><div class="opts" style="grid-template-columns:repeat(5,1fr);margin-left:0">${qs.map((q,i)=>`<span>${i+1}) ${LET[q.a]}</span>`).join('')}</div></div>`;
+ showPrev(h)}
+
+/* ---------- 3. स्वाध्याय ---------- */
+let SWT='a';
+function vSw(m){m.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px"><button class="back" style="margin:0" onclick="go('home')">← मुख्य पान</button><button class="btn bl" style="margin:0" onclick="togPdf()">📄 PDF तयार करा</button></div>
+ <div class="card"><div class="chips"><button class="chip ${SWT=='a'?'on':''}" onclick="SWT='a';vSw($('main'))">अ) पुस्तकातील स्वाध्याय</button><button class="chip ${SWT=='b'?'on':''}" onclick="SWT='b';vSw($('main'))">ब) अधिक स्वाध्याय (पुस्तकाबाहेरील)</button></div></div><div id="swb"></div>`;
+ SWT=='a'?swA($('swb')):swB($('swb'))}
+function ansBtn(id){return `<button class="btn ln" onclick="$('${id}').classList.toggle('show')">👁 उत्तर पाहा / लपवा</button>`}
+const IMG=(k,c)=>`<figure style="margin:8px 0;text-align:center"><img src="${IM[k]}" style="width:100%;max-width:420px;border-radius:14px;box-shadow:0 2px 8px #0003" alt=""><figcaption style="font-size:14px;color:#78716c">${c||''}</figcaption></figure>`;
+let SWID=0;
+const mk=c=>c&&typeof c=='object'?`<span class="ans2">${c.a}</span>`:(c==null?'':c);
+function swBlock(b,bi){let h=`<div class="card"><h2>${b.h}</h2>`;const id=x=>`sw${bi}_${x}`;
+ if(b.t=='mcq')h+=b.items.map((it,i)=>`<div class="qcard" id="${id(i)}"><div>${i+1}. ${it[0]}</div>${it[1].map((o,j)=>`<button class="opt" onclick="swM('${id(i)}',this,${j==it[2]},'${esc(it[1][it[2]]).replace(/'/g,"\\'")}')">${LET[j]}) ${o}</button>`).join('')}<div class="mm"></div></div>`).join('');
+ else if(b.t=='qa')h+=b.items.map((it,i)=>`<div class="qcard">${i+1}. ${it[0]}<br>${ansBtn(id('a'+i))}<div class="ans" id="${id('a'+i)}">✔ ${it[1]}</div></div>`).join('');
+ else if(b.t=='match')h+=`<table class="t"><tr><th>‘अ’ गट</th><th>उत्तर</th></tr>${b.L.map((x,i)=>`<tr><td style="text-align:left">${i+1}) ${x}</td><td><select id="${id('s'+i)}"><option value="">–</option>${b.R.map((r,j)=>`<option>${LET[j]}</option>`).join('')}</select></td></tr>`).join('')}</table><b>‘ब’ गट :</b><ul style="list-style:none;padding-left:4px">${b.R.map((r,j)=>`<li>${LET[j]}) ${r}</li>`).join('')}</ul><button class="btn gr" onclick="swMt(${bi})">तपासा</button><div id="${id('m')}"></div>`;
+ else if(b.t=='table')h+=`<table class="t"><tr>${b.head.map(x=>`<th>${x}</th>`).join('')}</tr>${b.rows.map(r=>`<tr>${r.map(c=>`<td>${mk(c)}</td>`).join('')}</tr>`).join('')}</table><button class="btn ln" onclick="document.querySelectorAll('#sw${bi}c .ans2').forEach(e=>e.classList.toggle('rev'))">👁 उत्तरे दाखवा</button>`.replace('<table class="t">',`<div id="sw${bi}c"><table class="t">`).replace('</table>','</table></div>');
+ else if(b.t=='order')h+=ordGame('क्रमाने लावा',b.items)+`<div class="msg in">योग्य क्रम : ${b.items.map((x,i)=>`${i+1}) ${x}`).join(' → ')}</div>`;
+ else if(b.t=='img')h+=b.items.map((it,i)=>`<div class="qcard">${qimg(it[0])}${i+1}. ${it[2]||''}<br>${ansBtn(id('a'+i))}<div class="ans" id="${id('a'+i)}">✔ ${it[1]}</div></div>`).join('');
+ else if(b.t=='concept')h+=`<div style="text-align:center"><b>${b.center}</b><br>⬇<div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap">${b.leaves.map(x=>`<span class="ans2" style="padding:6px 10px">${x}</span>`).join('')}</div></div><div id="sw${bi}c"></div><button class="btn ln" onclick="document.querySelectorAll('.ans2').forEach(e=>e.classList.toggle('rev'))">👁 उत्तरे दाखवा</button>`;
+ else if(b.t=='text')h+=`<ul>${b.items.map(x=>`<li>${x}</li>`).join('')}</ul>`;
+ return h+'</div>'}
+function swM(id,b,ok,a){const box=$(id);if(box.dataset.d)return;b.classList.add(ok?'ok':'no');if(ok)box.dataset.d=1;box.querySelector('.mm').innerHTML=ok?`<div class="msg ok">🎉 बरोबर!</div>`:`<div class="msg no">✘ पुन्हा प्रयत्न करा.</div>`}
+function swMt(bi){const b=SWB[bi];let ok=0;b.L.forEach((x,i)=>{const s=$(`sw${bi}_s${i}`),g=s.value===LET[b.A[i]];if(g)ok++;s.style.background=s.value?(g?'#dcfce7':'#fee2e2'):''});$(`sw${bi}_m`).innerHTML=ok==b.L.length?'<div class="msg ok">🎉 सर्व जोड्या बरोबर!</div>':`<div class="msg in">${ok}/${b.L.length} बरोबर. लाल रंगाच्या जोड्या बदला.</div>`}
+function swA(b){let h=SWB.map((x,i)=>swBlock(x,i)).join('');
+ h+=`<div class="card" id="pdfp" style="display:none"><h2>🖨 पुस्तकातील स्वाध्याय – PDF</h2><div class="tool">${schoolBox}<label><input type="checkbox" id="ky" checked onchange="regen()"> आदर्श उत्तरे जोडा</label>${prBtn}</div>${prHelp}<div class="paper" id="prev"></div></div>`;
+ b.innerHTML=`<style>.ans2{background:#e5e7eb;color:#e5e7eb;border-radius:6px;padding:0 6px;user-select:none}.ans2.rev{background:#dcfce7;color:#166534;font-weight:700}</style>`+h;REGEN=genSwA;genSwA()}
+function genSwA(){const ky=$('ky').checked,sc=$('sch').value.trim();const R=rng(11);
+ let h=dHead('स्वाध्याय (पाठ्यपुस्तकातील)','—',sc);const A=t=>`<span class="a">${t}</span>`;
+ SWB.forEach(b=>{h+=`<div class="qh">${b.h}</div>`;
+  if(b.t=='mcq')h+=b.items.map((it,i)=>`<div class="qb"><div>${i+1}. ${it[0]} <b>( &nbsp;&nbsp; )</b></div><div class="opts">${it[1].map((o,j)=>`<span>${LET[j]}) ${o}</span>`).join('')}</div>${ky?`<div class="a">उत्तर : ${LET[it[2]]}) ${it[1][it[2]]}</div>`:''}</div>`).join('');
+  else if(b.t=='qa')h+=b.items.map((it,i)=>b.lines>1?`<div class="qb">${i+1}. ${it[0]}${ky?`<div class="a"><pre>${it[1]}</pre></div>`:wl(b.lines)}</div>`:`<div class="qb">${i+1}. ${it[0]} ${ky?A('→ '+it[1]):'<i class="ln" style="min-width:45mm"></i>'}</div>`).join('');
+  else if(b.t=='match')h+=`<table class="w"><tr><th style="width:50%">‘अ’ गट</th><th>‘ब’ गट</th></tr>${b.L.map((x,i)=>`<tr><td>${i+1}) ${x} &nbsp;&nbsp; ( ${ky?A(LET[b.A[i]]):'&nbsp;&nbsp;'} )</td><td>${b.R[i]!=null?LET[i]+') '+b.R[i]:''}</td></tr>`).join('')}</table>`;
+  else if(b.t=='table')h+=`<table class="w"><tr>${b.head.map(x=>`<th>${x}</th>`).join('')}</tr>${b.rows.map(r=>`<tr>${r.map(c=>`<td>${c&&typeof c=='object'?(ky?A(c.a):'&nbsp;<br>&nbsp;'):(c==null?'':c)}</td>`).join('')}</tr>`).join('')}</table>`;
+  else if(b.t=='order'){const idx=shuf(b.items.map((x,i)=>i),R);h+=idx.map((j,i)=>`<div class="qb">${i+1}. ${b.items[j]}</div>`).join('')+(ky?A('योग्य क्रम : '+b.items.map((x,i)=>idx.indexOf(i)+1).join(' → ')):wl(2))}
+  else if(b.t=='img')h+=b.items.map((it,i)=>`<div class="qb"><img src="${IM[it[0]]}" style="height:30mm;border-radius:2mm"> ${i+1}. ${it[2]||''} ${ky?A('→ '+it[1]):'<i class="ln" style="min-width:45mm"></i>'}</div>`).join('');
+  else if(b.t=='concept')h+=`<div style="text-align:center"><b style="border:1.2px solid #000;padding:2px 10px">${b.center}</b><div style="display:flex;gap:8px;justify-content:center;margin-top:6px">${b.leaves.map(x=>`<span style="border:1.2px solid #000;padding:6px 12px;min-width:30mm">${ky?A(x):'&nbsp;'}</span>`).join('')}</div></div>`;
+  else if(b.t=='text')h+=`<ul>${b.items.map(x=>`<li>${x}</li>`).join('')}</ul>`;
+  if(b.t=='qb'||b.p)h+=''; });
+ showPrev(h)}
+
+let SB=401;
+function sbData(seed){const R=rng(seed);const fb=shuf(FB,R).slice(0,6),mt=shuf(MT,R).slice(0,5),mtB=shuf(mt.map((x,i)=>[x[1],i]),R),tf=shuf(TF,R).slice(0,6),os=shuf(OS,R).slice(0,5),sa=shuf(SA,R).slice(0,3);return{fb,mt,mtB,tf,os,sa}}
+function swB(b){b.innerHTML=`<div id="sbq"></div><div class="card" id="pdfp" style="display:none"><h2>🖨 अधिक स्वाध्याय – PDF</h2><div class="tool">${schoolBox}${keyBox}${prBtn}</div>${prHelp}<div class="paper" id="prev"></div></div>`;REGEN=()=>{genSwB()};renderSbq();genSwB()}
+function newSb(){SB=1+Math.floor(Math.random()*99999);renderSbq();genSwB()}
+function sbRev(id){$(id).classList.toggle('show')}
+function sbTf(i,v,t,c,b){const ok=(v==t);b.parentNode.querySelectorAll('.opt').forEach(x=>x.classList.remove('ok','no'));b.classList.add(ok?'ok':'no');$('tf'+i).innerHTML=ok?`<span class="msg ok">🎉 बरोबर! ${t?'हे विधान बरोबर आहे.':'हे विधान चूक आहे. बरोबर : '+c}</span>`:`<span class="msg no">✘ पुन्हा विचार करा.</span>`}
+function sbMt(){const d=sbData(SB);let ok=0;d.mt.forEach((x,i)=>{const s=$('sm'+i),good=LET[d.mtB.findIndex(y=>y[1]==i)];const g=s.value===good;if(g)ok++;s.style.background=s.value?(g?'#dcfce7':'#fee2e2'):''});$('smm').innerHTML=ok==d.mt.length?'<div class="msg ok">🎉 सर्व जोड्या बरोबर!</div>':`<div class="msg in">${ok}/${d.mt.length} बरोबर. लाल रंगाच्या जोड्या बदला.</div>`}
+function renderSbq(){const d=sbData(SB);let h=`<div class="card"><h2>✍️ अधिक स्वाध्याय · संच क्र. ${SB}</h2><button class="btn gr" onclick="newSb()">🎲 नवे प्रश्न</button></div>`;
+ h+=`<div class="card"><h2>प्र.1 रिकाम्या जागा भरा.</h2>${d.fb.map((x,i)=>`<div class="qcard">${i+1}) ${x[0]}<br>${ansBtn('f'+i)}<div class="ans" id="f${i}">✔ ${x[1]}</div></div>`).join('')}</div>`;
+ h+=`<div class="card"><h2>प्र.2 जोड्या जुळवा.</h2><table class="t"><tr><th>‘अ’ गट</th><th>उत्तर</th></tr>${d.mt.map((x,i)=>`<tr><td style="text-align:left">${i+1}) ${x[0]}</td><td><select id="sm${i}"><option value="">–</option>${LET.concat(['इ']).slice(0,5).map(l=>`<option>${l}</option>`).join('')}</select></td></tr>`).join('')}</table><b>‘ब’ गट :</b><ul style="list-style:none;padding-left:4px">${d.mtB.map((y,j)=>`<li>${LET.concat(['इ'])[j]}) ${y[0]}</li>`).join('')}</ul><button class="btn gr" onclick="sbMt()">तपासा</button><div id="smm"></div></div>`;
+ h+=`<div class="card"><h2>प्र.3 बरोबर की चूक?</h2>${d.tf.map((x,i)=>`<div class="qcard">${i+1}. ${x[0]}<div><button class="opt" style="display:inline-block;width:auto" onclick="sbTf(${i},1,${x[1]},'${esc(x[2]).replace(/'/g,"\\'")}',this)">✔ बरोबर</button> <button class="opt" style="display:inline-block;width:auto" onclick="sbTf(${i},0,${x[1]},'${esc(x[2]).replace(/'/g,"\\'")}',this)">✘ चूक</button></div><div id="tf${i}"></div></div>`).join('')}</div>`;
+ h+=`<div class="card"><h2>प्र.4 एका वाक्यात उत्तरे लिहा.</h2>${d.os.map((x,i)=>`<div class="qcard">${i+1}. ${x[0]}<br>${ansBtn('o4'+i)}<div class="ans" id="o4${i}">✔ ${x[1]}</div></div>`).join('')}</div>`;
+ h+=`<div class="card"><h2>प्र.5 थोडक्यात उत्तरे लिहा.</h2>${d.sa.map((x,i)=>`<div class="qcard">${i+1}. ${x[0]}<br>${ansBtn('s5'+i)}<div class="ans" id="s5${i}">${x[1]}</div></div>`).join('')}</div>`;
+ $('sbq').innerHTML=h}
+function genSwB(){const seed=SB,ky=$('ky').checked,sc=$('sch').value.trim();const {fb,mt,mtB,tf,os,sa}=sbData(seed);
+ let h=dHead('अधिक स्वाध्याय',30,sc)+`<div class="ds">संच क्र. ${seed}</div>`;
+ h+=`<div class="qh">प्र.1 रिकाम्या जागा भरा. (6 गुण)</div>`+fb.map((x,i)=>`<div class="qb">${i+1}) ${x[0]}</div>`).join('');
+ h+=`<div class="qh">प्र.2 जोड्या जुळवा. (5 गुण)</div><table class="w"><tr><th style="width:50%">‘अ’ गट</th><th>‘ब’ गट</th></tr>${mt.map((x,i)=>`<tr><td>${i+1}) ${x[0]} &nbsp;&nbsp; ( &nbsp;&nbsp; )</td><td>${LET.concat(['इ'])[i]}) ${mtB[i][0]}</td></tr>`).join('')}</table>`;
+ h+=`<div class="qh">प्र.3 खालील विधाने बरोबर की चूक ते लिहा. चूक असल्यास दुरुस्त करून लिहा. (6 गुण)</div>`+tf.map((x,i)=>`<div class="qb">${i+1}. ${x[0]} <b>( &nbsp;&nbsp;&nbsp;&nbsp; )</b></div>`).join('');
+ h+=`<div class="qh">प्र.4 एका वाक्यात उत्तरे लिहा. (5 गुण)</div>`+os.map((x,i)=>`<div class="qb">${i+1}. ${x[0]}${wl(1)}</div>`).join('');
+ h+=`<div class="qh">प्र.5 थोडक्यात उत्तरे लिहा. (8 गुण)</div>`+sa.map((x,i)=>`<div class="qb">${i+1}. ${x[0]}${wl(4)}</div>`).join('');
+ if(ky){const mk=mt.map((x,i)=>`${i+1} → ${LET.concat(['इ'])[mtB.findIndex(y=>y[1]==i)]}`);
+  h+=`<div class="qb key"><b>उत्तरसूची (शिक्षकांसाठी) – संच ${seed}</b><div class="qh">प्र.1</div>${fb.map((x,i)=>`<div>${i+1}) ${x[1]}</div>`).join('')}<div class="qh">प्र.2</div><div>${mk.join(' &nbsp; ')}</div><div class="qh">प्र.3</div>${tf.map((x,i)=>`<div>${i+1}) ${x[1]?'बरोबर':'चूक – '+x[2]}</div>`).join('')}<div class="qh">प्र.4</div>${os.map((x,i)=>`<div>${i+1}) ${x[1]}</div>`).join('')}<div class="qh">प्र.5 (मार्गदर्शक मुद्दे)</div>${sa.map((x,i)=>`<div class="qb">${i+1}) <pre>${x[1]}</pre></div>`).join('')}</div>`}
+ showPrev(h)}
+
+/* ---------- 4. HOTS ---------- */
+function vHots(m){m.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px"><button class="back" style="margin:0" onclick="go('home')">← मुख्य पान</button><button class="btn bl" style="margin:0" onclick="togPdf()">📄 PDF तयार करा</button></div>
+ <div class="card"><h2>🧠 उपयोजनात्मक / उच्चस्तरीय विचार प्रश्न</h2><p>पाठाच्या आशयावर आधारित पण पाठ्यपुस्तकाबाहेरील प्रश्न. स्वतः उत्तर लिहून मग ‘मार्गदर्शक मुद्दे’ पाहा.</p>
+ ${HOTS.map((x,i)=>`<div class="qcard"><span class="tag">${x[0]}</span><b>${i+1}. ${x[1]}</b><br>${ansBtn('hq'+i)}<div class="ans" id="hq${i}">💡 मार्गदर्शक मुद्दे:\n${x[2]}</div></div>`).join('')}</div>
+ <div class="card" id="pdfp" style="display:none"><h2>🖨 HOTS प्रश्नपत्रिका (A4 PDF)</h2><div class="tool"><label>प्रश्न:</label><select id="hn" onchange="regen()"><option>4</option><option selected>6</option><option>8</option></select>${seedBox(501)}${schoolBox}${keyBox}${prBtn}</div>${prHelp}<div class="paper" id="prev"></div></div>`;
+ REGEN=genHots;genHots()}
+function genHots(){const seed=+$('seed').value||1,R=rng(seed),n=+$('hn').value,ky=$('ky').checked,sc=$('sch').value.trim();const qs=shuf(HOTS,R).slice(0,n);
+ let h=dHead('उपयोजनात्मक / उच्चस्तरीय विचार प्रश्न',n*3,sc)+`<div class="ds">संच क्र. ${seed} · स्वतःच्या शब्दांत सविस्तर उत्तरे लिहा.</div>`;
+ h+=qs.map((x,i)=>`<div class="qb"><div class="qh">प्र.${i+1} <small>[${x[0]}]</small> ${x[1]} (3 गुण)</div>${wl(6)}</div>`).join('');
+ if(ky)h+=`<div class="qb key"><b>मार्गदर्शक मुद्दे (शिक्षकांसाठी) – संच ${seed}</b>${qs.map((x,i)=>`<div class="qb"><b>प्र.${i+1}</b><pre>${x[2]}</pre></div>`).join('')}</div>`;
+ showPrev(h)}
+
+/* ---------- boot ---------- */
+document.title=L.name;$('hdr').textContent=L.name;
+const h0=location.hash.replace('#','');if(['learn','mcq','sw','hots'].includes(h0))view=h0;
+draw();
+</script>
+</body>
+</html>
