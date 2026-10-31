@@ -234,7 +234,7 @@ function vMcq(m){m.innerHTML=`<div style="display:flex;justify-content:space-bet
  <div class="card" id="pdfp" style="display:none"><h2>🖨 MCQ चाचणी (A4 PDF)</h2><div class="tool"><label>प्रश्न:</label><select id="mn" onchange="regen()"><option>10</option><option selected>15</option><option>20</option><option>25</option></select>${seedBox(301)}${schoolBox}${keyBox}${prBtn}</div>${prHelp}<div class="paper" id="prev"></div></div>`;
  REGEN=genMcq;mcStart();genMcq()}
 function drawMc(){const b=$('mcb');if(!b)return;
- if(MC.done){b.innerHTML=`<h2>📊 निकाल : ${MC.sc} / ${MC.qs.length}</h2><div class="msg ${MC.sc>=8?'ok':'in'}">${MC.sc>=9?'उत्तम! 🏆':MC.sc>=7?'छान! 👍':'पुन्हा सराव करा 💪'}</div>${MC.wrong.length?'<h3>चुकलेले प्रश्न:</h3>'+MC.wrong.map(w=>`<div class="qcard"><b>${w.q}</b><div class="ans show">✔ ${w.o[w.a]}\n${w.e}</div></div>`).join(''):''}<button class="btn gr" onclick="mcStart()">🔄 नवे 10 प्रश्न</button>`;return}
+ if(MC.done){ssRep(MC);b.innerHTML=`<h2>📊 निकाल : ${MC.sc} / ${MC.qs.length}</h2><div class="msg ${MC.sc>=8?'ok':'in'}">${MC.sc>=9?'उत्तम! 🏆':MC.sc>=7?'छान! 👍':'पुन्हा सराव करा 💪'}</div>${MC.wrong.length?'<h3>चुकलेले प्रश्न:</h3>'+MC.wrong.map(w=>`<div class="qcard"><b>${w.q}</b><div class="ans show">✔ ${w.o[w.a]}\n${w.e}</div></div>`).join(''):''}<button class="btn gr" onclick="mcStart()">🔄 नवे 10 प्रश्न</button>`;return}
  const q=MC.qs[MC.i];b.innerHTML=`<h2>❓ सराव (${MC.i+1}/${MC.qs.length}) <small style="float:right">⭐ ${MC.sc}</small></h2><div class="prog"><i style="width:${MC.i/MC.qs.length*100}%"></i></div><p><b>${q.q}</b></p>${q.o.map((o,i)=>`<button class="opt" onclick="mcA(${i},this)">${LET[i]}) ${o}</button>`).join('')}<div id="mcm"></div>`}
 function mcA(i,b){const q=MC.qs[MC.i];if(q.d)return;q.d=1;const bs=document.querySelectorAll('#mcb .opt');bs[q.a].classList.add('ok');if(i!=q.a)b.classList.add('no');if(i==q.a)MC.sc++;else MC.wrong.push(q);
  $('mcm').innerHTML=`<div class="msg ${i==q.a?'ok':'no'}">${i==q.a?'🎉 बरोबर!':'✘ चुकले.'} ${q.e}</div><button class="btn" onclick="MC.i++;if(MC.i>=MC.qs.length)MC.done=true;drawMc()">${MC.i==MC.qs.length-1?'निकाल पाहा':'पुढचा प्रश्न ▶'}</button>`}
@@ -323,6 +323,10 @@ function genHots(){const seed=+$('seed').value||1,R=rng(seed),n=+$('hn').value,k
 document.title=L.name;$('hdr').textContent=L.name;
 const h0=location.hash.replace('#','');if(['learn','mcq','sw','hots'].includes(h0))view=h0;
 draw();
+</script>
+<script>
+/* स्वयं अध्ययन निकाल: ॲपमध्ये (iframe) उघडला असेल तरच गुण ॲपला कळवतो */
+function ssRep(m){if(m.rep)return;m.rep=1;try{if(window.parent&&window.parent!==window)window.parent.postMessage({type:'ssResult',card:'mcq',score:m.sc,total:m.qs.length,t:Date.now()},'*')}catch(e){}}
 </script>
 </body>
 </html>
