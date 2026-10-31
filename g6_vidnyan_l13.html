@@ -379,8 +379,8 @@ const h0=location.hash.replace('#','');if(['learn','mcq','sw','hots'].includes(h
 draw();
 </script>
 <script>
-/* स्वयं अध्ययन निकाल: ॲपमध्ये (iframe) उघडला असेल तरच गुण ॲपला कळवतो */
-function ssRep(m){if(m.rep)return;m.rep=1;try{if(window.parent&&window.parent!==window)window.parent.postMessage({type:'ssResult',card:'mcq',score:m.sc,total:m.qs.length,t:Date.now()},'*')}catch(e){}}
+/* स्वयं अध्ययन निकाल: ॲपमधून (iframe किंवा नवीन विंडो) उघडला असेल तरच गुण ॲपला कळवतो */
+function ssRep(m){if(m.rep)return;m.rep=1;try{var T=(window.parent&&window.parent!==window)?window.parent:window.opener;if(T)T.postMessage({type:'ssResult',card:'mcq',score:m.sc,total:m.qs.length,t:Date.now()},'*')}catch(e){}}
 </script>
 </body>
 </html>
