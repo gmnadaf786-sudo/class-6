@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="mr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>६वी अभ्यास</title>
+<meta name="theme-color" content="#9a3412">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png">
+<style>
+:root{--bg:#fff7ed;--ink:#1c1917;--mut:#78716c;--card:#fff;--line:#e7e5e4;--b:#9a3412}
+@media(prefers-color-scheme:dark){:root{--bg:#1c1917;--ink:#fafaf9;--mut:#a8a29e;--card:#292524;--line:#44403c}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.5 "Noto Sans Devanagari","Mukta",system-ui,sans-serif;padding-bottom:env(safe-area-inset-bottom)}
+header{background:linear-gradient(135deg,#9a3412,#c2410c 60%,#b45309);color:#fff;padding:16px;padding-top:calc(16px + env(safe-area-inset-top));position:sticky;top:0;z-index:5}
+header h1{margin:0;font-size:20px}header p{margin:2px 0 0;font-size:13px;opacity:.9}
+.back{background:rgba(255,255,255,.2);border:0;color:#fff;border-radius:8px;padding:6px 12px;font:inherit;font-size:14px;margin-bottom:6px}
+main{padding:16px;max-width:760px;margin:auto}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:560px){.grid{grid-template-columns:repeat(3,1fr)}}
+.sub{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 10px;text-align:center;cursor:pointer;border-top:5px solid var(--c)}
+.sub .e{font-size:34px}.sub b{display:block;margin-top:4px}.sub small{color:var(--mut)}
+.bar{height:6px;background:var(--line);border-radius:3px;margin-top:8px;overflow:hidden}.bar i{display:block;height:100%;background:var(--c)}
+input{width:100%;padding:11px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;margin-bottom:12px}
+.les{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:8px;cursor:pointer;width:100%;text-align:left;color:var(--ink);font:inherit}
+.les .n{min-width:34px;height:34px;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;font-size:14px;font-weight:700}
+.les span.t{flex:1}.chip{font-size:12px;padding:2px 8px;border-radius:99px;background:#dcfce7;color:#166534;white-space:nowrap}
+.chip.m{background:#fef3c7;color:#92400e}.chip.l{background:#fee2e2;color:#991b1b}
+#view{position:fixed;inset:0;background:var(--bg);z-index:10;display:none;flex-direction:column}
+#view .tb{display:flex;align-items:center;gap:10px;background:var(--b);color:#fff;padding:8px 12px;padding-top:calc(8px + env(safe-area-inset-top))}
+#view .tb button{background:rgba(255,255,255,.2);border:0;color:#fff;border-radius:8px;padding:6px 12px;font:inherit}
+#view .tb span{flex:1;font-size:14px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+#view iframe{flex:1;border:0;width:100%}
+#inst{display:none;margin:0 0 12px;padding:10px 14px;background:#fef3c7;color:#92400e;border-radius:12px;font-size:14px}
+#inst button{margin-left:8px;border:0;background:#92400e;color:#fff;border-radius:8px;padding:5px 12px;font:inherit}
+</style></head><body>
+<header><div id="hb"></div><h1 id="ht">६वी – सर्व विषय</h1><p id="hp">आपला स्वयं अध्ययन साथी</p></header>
+<main><div id="inst">📲 हे अ‍ॅप फोनवर ठेवा <button id="ib">इन्स्टॉल</button></div><div id="m"></div></main>
+<div id="view"><div class="tb"><button onclick="closeV()">← मागे</button><span id="vt"></span><button onclick="nextL()">पुढचा →</button></div><iframe id="fr" title="पाठ"></iframe></div>
+<script>
+var D=[{"n": "मराठी", "p": "g6_marathi", "i": "📖", "c": "#c2410c", "l": [[1, "सत्य शिवाहुन सुंदर हे (प्रार्थना)"], [2, "पुस्तक माझा गुरू"], [3, "आला पाऊस (कविता)"], [4, "अनुभवांच्या खाणी"], [5, "प्रकाशयात्री (कविता)"], [6, "राष्ट्रध्वज माझा अभिमान"], [7, "खोप्यामधी खोपा (कविता)"], [8, "चांदोबास पत्र"], [9, "गीत मराठी गाऊ या (कविता)"], [10, "लोकनृत्ये"], [11, "भल्लगडी दादा (कविता)"], [12, "धाडसी रोहन"], [13, "फिटे अंधाराचे जाळे (कविता)"], [14, "रक्षण पर्यावरणाचे"], [15, "आंब्याचा मोहोर"], [16, "आम्ही असू वेगळे (कविता)"], [17, "संगणकातील ‘परम’पूज्य"], [18, "हा देश माझा (कविता)"], [19, "खरी संपत्ती"], [20, "विचारधन"]]}, {"n": "हिंदी", "p": "g6_hindi", "i": "🇮🇳", "c": "#be185d", "l": [[1, "सैर"], [2, "बसंती हवा (कविता)"], [3, "उपहार"], [4, "जोकर"], [5, "आओ, आयु बताना सीखो – महाराष्ट्र की बेटी"], [6, "मेरा अहोभाग्य"], [7, "नदी कंधे पर (कविता)"], [8, "जन्मदिन"], [9, "सोई मेरी छौना रे ! (लोरी)"], [10, "उपयोग हमारे"], [11, "तूफानों से क्या डरना (कविता)"], [12, "कठपुतली"], [13, "सोना और लोहा"], [14, "क्या तुम जानते हो ? – पहेलियाँ"], [15, "स्वास्थ्य संपदा"], [16, "कागज की थैली"], [17, "टीटू और चिंकी"], [18, "वह देश कौन-सा है ? (कविता)"]]}, {"n": "इंग्रजी", "p": "g6_english", "i": "🔤", "c": "#1d4ed8", "l": [[1, "Monsoon"], [2, "The Crow and the Snake"], [3, "Secret Plan of the Vegetables"], [4, "The People Who Protect Nature"], [5, "One Thing that I Wonder"], [6, "The Brother"], [7, "Stories on Strings"], [8, "All About News"], [9, "Healthy Dessert : Millet Kheer of Kalahandi Tribals"], [10, "The Plight of the Shy Son-in-Law"], [11, "The World of Geometry"], [12, "She Knew No Fear"], [13, "In Eskimo Land"], [14, "The Magic Words Club"], [15, "Joy of Letter Writing"], [17, "Aim High like Sheetal Devi"], [18, "How to Salute the Sun"], [19, "The Naughty Keyboard"], [20, "A Honey Bee Speaks: A Monologue"], [21, "Homework Machine"], [22, "The Lifeline of Maharashtra : The Godavari River"], [23, "Nasreddin Hodja and the Smell of Soup"], [24, "Festival of Kites"], [25, "The Magic of Flute"], [26, "The World is With You"], [27, "The Day Dreamer"], [28, "The Space Women Scientists in India"], [29, "My Books"], [30, "Playing Detective"]]}, {"n": "गणित", "p": "g6_ganit", "i": "➗", "c": "#7c3aed", "l": [[1, "त्रिमितीय आकार"], [2, "रेषा आणि कोन"], [3, "संख्यांच्या जगात"], [4, "आकृतिबंध"], [5, "म.सा.वि. आणि ल.सा.वि."], [6, "अपूर्णांक"], [7, "गुणोत्तर व प्रमाण"], [8, "त्रिकोण व चौकोन"], [9, "समीकरणे"], [10, "जादुई गणित – 1"], [11, "दशांश अपूर्णांक"], [12, "नफा-तोटा"], [13, "शेकडेवारी"], [14, "भौमितिक रचना"], [15, "परिमिती व क्षेत्रफळ"], [16, "बौधायन-पायथागोरस त्रिकुट"], [17, "बँक व सरळव्याज"], [18, "माहितीचे सादरीकरण"]]}, {"n": "सामान्य विज्ञान", "p": "g6_vidnyan", "i": "🔬", "c": "#15803d", "l": [[1, "लक्षणे सजीवांची"], [2, "मापन"], [3, "विलग करू या घटक"], [4, "सजीवांतील विविधता"], [5, "आपत्ती व्यवस्थापन"], [6, "गुणधर्म पदार्थांचे"], [7, "प्रवास प्रकाशाचा"], [8, "आकाशाच्या पलीकडे"], [9, "आहारातून आरोग्याकडे"], [10, "चुंबकाच्या दुनियेत"], [11, "बल आणि दाब"], [12, "गती आणि गतीचे प्रकार"], [13, "निसर्ग संपदा"]]}, {"n": "इतिहास", "p": "g6_itihas", "i": "🏛️", "c": "#9a3412", "l": [[1, "इतिहासाची साधने"], [2, "प्रागैतिहासिक काळ"], [3, "हडप्पा संस्कृती"], [4, "वैदिक संस्कृती"], [5, "विविध धर्मांची शिकवण"], [6, "जनपदे आणि महाजनपदे"], [7, "मौर्यकालीन भारत"], [8, "प्राचीन भारतातील व महाराष्ट्रातील राज्ये व राजघराणी"], [9, "प्राचीन भारताचा सांस्कृतिक वारसा"], [10, "प्राचीन भारत व जग"]]}, {"n": "नागरिकशास्त्र", "p": "g6_nagrik", "i": "⚖️", "c": "#0f766e", "l": [[1, "आपले समाजजीवन"], [2, "भारतीय संविधान"], [3, "भारतीय संविधानाची प्रास्ताविका व वैशिष्ट्ये"], [4, "स्थानिक शासनसंस्था (ग्रामीण)"], [5, "स्थानिक शासनसंस्था (शहरी)"], [6, "जिल्हा प्रशासन"]]}, {"n": "भूगोल", "p": "g6_bhugol", "i": "🌍", "c": "#0369a1", "l": [[1, "मैत्री भूगोलाशी"], [2, "भारतीय भूगोलाचा इतिहास"], [3, "वृत्तांची दुनिया"], [4, "प्रात्यक्षिक कार्य"], [5, "शिलावरण"], [6, "वातावरण"], [7, "जलावरण व जीवावरण"], [8, "संसाधने"], [9, "आर्थिक क्रिया"], [10, "मानवी वस्ती"], [11, "शाश्वत विकासाची दिशा"]]}];
+var K='c6_prog_v1',P={};try{P=JSON.parse(localStorage.getItem(K)||'{}')}catch(e){}
+function save(){try{localStorage.setItem(K,JSON.stringify(P))}catch(e){}}
+var cur=null,curL=null;
+function key(s,n){return s.p+'_'+n}
+function home(){cur=null;document.getElementById('hb').innerHTML='';ht.textContent='६वी – सर्व विषय';hp.textContent='विषय निवडा';
+ var h='<div class="grid">';D.forEach(function(s,i){var d=s.l.filter(function(x){return P[key(s,x[0])]}).length;
+ h+='<div class="sub" style="--c:'+s.c+'" onclick="openS('+i+')"><div class="e">'+s.i+'</div><b>'+s.n+'</b><small>'+d+' / '+s.l.length+' पाठ</small><div class="bar"><i style="width:'+Math.round(d*100/s.l.length)+'%"></i></div></div>'});
+ m.innerHTML=h+'</div>'}
+function chip(r){if(!r)return '';var p=Math.round(r.s*100/r.t);return '<span class="chip '+(p>=75?'':p>=50?'m':'l')+'">'+r.s+'/'+r.t+'</span>'}
+function openS(i,q){cur=D[i];document.getElementById('hb').innerHTML='<button class="back" onclick="home()">← विषय</button>';ht.textContent=cur.n;hp.textContent=cur.l.length+' पाठ';
+ var h='<input id="q" placeholder="पाठ शोधा…" oninput="openS('+i+',this.value)" value="'+(q||'')+'">';
+ cur.l.forEach(function(x){if(q&&x[1].toLowerCase().indexOf(q.toLowerCase())<0)return;
+  h+='<button class="les" style="--c:'+cur.c+'" onclick="openL('+x[0]+')"><div class="n">'+x[0]+'</div><span class="t">'+x[1]+'</span>'+chip(P[key(cur,x[0])])+'</button>'});
+ m.innerHTML=h;if(q!==undefined){var e=document.getElementById('q');e.focus();e.setSelectionRange(e.value.length,e.value.length)}}
+function openL(n){curL=n;var l=cur.l.filter(function(x){return x[0]==n})[0];vt.textContent=cur.n+' – '+n+'. '+l[1];fr.src=cur.p+'_l'+n+'.html';view.style.display='flex'}
+function closeV(){view.style.display='none';fr.src='about:blank';if(cur)openS(D.indexOf(cur))}
+function nextL(){var ix=cur.l.map(function(x){return x[0]});var j=ix.indexOf(curL);if(j+1<ix.length)openL(ix[j+1]);else closeV()}
+window.addEventListener('message',function(e){var d=e.data;if(!d||d.type!=='ssResult'||!cur)return;
+ var k=key(cur,curL),o=P[k];if(!o||d.score/d.total>=o.s/o.t)P[k]={s:d.score,t:d.total};save()});
+var dp;window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();dp=e;inst.style.display='block'});
+ib.onclick=function(){if(dp){dp.prompt();dp=null;inst.style.display='none'}};
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(function(){});
+home();
+</script></body></html>
